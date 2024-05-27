@@ -7,7 +7,7 @@ const LoginForm = () => {
   const handleSubmit = (event) => {
     const data = {
       username: usernameRef.current.value,
-      rawPassword: usernameRef.current.value,
+      rawPassword: passwordRef.current.value,
     };
     const response = login(data);
     response.then(alert());
