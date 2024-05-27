@@ -1,10 +1,17 @@
 import React, { useRef } from "react";
+import { login } from "../../services/AdminService.ts";
 
 const LoginForm = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const handleSubmit = (event) => {
-    alert(passwordRef.current.value);
+    const data = {
+      username: usernameRef.current.value,
+      rawPassword: usernameRef.current.value,
+    };
+    const response = login(data);
+    response.then(alert());
+    event.preventDefault();
   };
   return (
     <form onSubmit={handleSubmit}>
