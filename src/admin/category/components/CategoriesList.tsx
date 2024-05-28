@@ -1,5 +1,8 @@
 import React from "react";
-import { getAllCategories } from "../../services/AdminService.ts";
+import {
+  deleteCategory,
+  getAllCategories,
+} from "../../services/AdminService.ts";
 import useSWR from "swr";
 import CategoryRow from "./CategoryRow.tsx";
 
@@ -8,6 +11,16 @@ const CategoriesList = () => {
     "/categories",
     getAllCategories
   );
+  const handleDelete = (id) => {
+    deleteCategory(id)
+      .then(() => {
+        alert("Delete category successfully");
+        mutate();
+      })
+      .catch(() => {
+        alert("Failed to delete category");
+      });
+  };
   if (error) return <h1>Error</h1>;
   if (isLoading) return <h1>Loading...</h1>;
   console.log(data?.data);
@@ -26,8 +39,8 @@ const CategoriesList = () => {
         </tr>
       </thead>
       <tbody>
-        {data?.data.map((category) => (
-          <CategoryRow category={category} />
+        {data?.data.content.map((category) => (
+          <CategoryRow category={category} handleDelete={handleDelete} />
         ))}
       </tbody>
     </table>
