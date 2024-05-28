@@ -30,3 +30,18 @@ export async function createNewCategory(data: { name: string; desc: string }) {
     withCredentials: true,
   });
 }
+
+export async function updateCategory(id: number, desc: string) {
+  const data = {
+    desc: desc,
+  };
+  return axios.put(STORE_BACK_API + "/categories/" + id.toString(), data, {
+    withCredentials: true,
+  });
+}
+
+export async function deleteCategory(id: number) {
+  return axios.delete(STORE_BACK_API + "/categories/" + id.toString(), {
+    withCredentials: true,
+  });
+}
