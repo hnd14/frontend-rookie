@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { login } from "../../services/AdminService.ts";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const handleSubmit = (event) => {
@@ -9,8 +11,18 @@ const LoginForm = () => {
       username: usernameRef.current.value,
       rawPassword: passwordRef.current.value,
     };
-    const response = login(data);
-    response.then(alert());
+    login(data)
+      .then((response) => {
+        let data = response.data;
+        window.sessionStorage.setItem("accessToken", data["accessToken"]);
+        window.sessionStorage.setItem("isAdmin", data["isAdmin"]);
+        window.sessionStorage.setItem("isCustomer", data["isCustomer"]);
+        navigate("/admin");
+      })
+      .catch((error) => {
+        alert("Username or password is wrong!");
+        navigate("/login");
+      });
     event.preventDefault();
   };
   return (
