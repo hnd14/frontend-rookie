@@ -27,7 +27,7 @@ const LoginForm = () => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      <div className="mb-3">
+      <div className="form-group">
         <label htmlFor="username" className="form-label">
           Username
         </label>
@@ -39,7 +39,7 @@ const LoginForm = () => {
         />
       </div>
 
-      <div className="mb-3">
+      <div className="form-group">
         <label htmlFor="password" className="form-label">
           Password
         </label>
