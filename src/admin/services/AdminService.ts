@@ -19,11 +19,13 @@ export async function login(data: LoginData) {
   return response;
 }
 
-export async function getAllCategories() {
-  return axios.get(STORE_BACK_API + "/categories", {
-    withCredentials: true,
-  });
-}
+export const getAllCategories = (pageNumber) => {
+  return axios
+    .get(STORE_BACK_API + "/categories?pageNumber=" + pageNumber.toString(), {
+      withCredentials: true,
+    })
+    .then((res) => res.data);
+};
 
 export async function createNewCategory(data: { name: string; desc: string }) {
   return axios.post(STORE_BACK_API + "/categories", data, {
