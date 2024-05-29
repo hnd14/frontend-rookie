@@ -4,4 +4,5 @@ export type NewProductItem = {
   salePrice: number;
   stock: number;
   isFeatured: boolean;
+  categoriesId: number[];
 };

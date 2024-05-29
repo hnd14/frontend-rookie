@@ -76,3 +76,11 @@ export async function deleteProduct(id: number) {
     withCredentials: true,
   });
 }
+
+export const getProducts = (id: string) => {
+  return axios
+    .get(STORE_BACK_API + "/products/" + id.toString(), {
+      withCredentials: true,
+    })
+    .then((res) => res.data);
+};

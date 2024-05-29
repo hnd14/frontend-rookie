@@ -47,8 +47,8 @@ const ProductTable = () => {
             <th>Name</th>
             <th>Description</th>
             <th>Price</th>
-            <th>Featured</th>
             <th>Stock</th>
+            <th>Featured</th>
             <th></th>
           </tr>
         </thead>
