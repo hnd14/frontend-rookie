@@ -28,7 +28,12 @@ const LoginForm = () => {
       };
       login(data)
         .then((response) => {
-          navigate("/admin");
+          console.log(response.data.isAdmin);
+          if (response.data.isAdmin) {
+            navigate("/admin");
+          } else {
+            navigate("/");
+          }
         })
         .catch((error) => {
           alert("Username or password is wrong!");
@@ -38,7 +43,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="border container-fluid" style={{ width: "500px" }}>
+    <div className="border container-fluid">
       <h1 className="m-1">Log in</h1>
       <form onSubmit={handleSubmit}>
         <div className="form-group m-1">
@@ -65,7 +70,7 @@ const LoginForm = () => {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary m-2">
+        <button type="submit" className="btn btn-dark m-2">
           Submit
         </button>
       </form>
