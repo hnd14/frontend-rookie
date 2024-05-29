@@ -16,3 +16,9 @@ export async function login(data: LoginData) {
 
   return response;
 }
+
+export async function logout() {
+  return axios.get("http://localhost:8080/auth/log-out", {
+    withCredentials: true,
+  });
+}
