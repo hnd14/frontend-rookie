@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Button, Form, InputGroup } from "react-bootstrap";
 import { NewProductItem } from "../../product/model/NewProductItem";
-import { createNewProducts } from "../../services/AdminService.ts";
+import Select from "react-select";
+import {
+  createNewProducts,
+  getAllCategories,
+} from "../../services/AdminService.ts";
+import useSWR from "swr";
 
 const NewProductForm = () => {
   const [validated, setValidated] = useState(false);
+  const categoriesRef = useRef(null);
+  const { data, error, isLoading } = useSWR(["/categories", 1], ([url, arg]) =>
+    getAllCategories(arg)
+  );
 
+  if (error) return <h1>Error</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -18,6 +29,9 @@ const NewProductForm = () => {
         salePrice: document.getElementById("productPrice")?.value,
         stock: document.getElementById("productStock")?.value,
         isFeatured: document.getElementById("productIsFeatured")?.checked,
+        categoriesId: categoriesRef.current.getValue().map((catOption) => {
+          return catOption.value;
+        }),
       };
       console.log(data);
       createNewProducts(data).then(() => {
@@ -27,6 +41,13 @@ const NewProductForm = () => {
 
     setValidated(true);
   };
+  const options = data.content.map((category) => {
+    console.log(category);
+    return {
+      value: category.id,
+      label: category.name,
+    };
+  });
   return (
     <div className="container">
       <h1>New product</h1>
@@ -54,6 +75,7 @@ const NewProductForm = () => {
           <Form.Check.Label>Featured</Form.Check.Label>
           <Form.Check></Form.Check>
         </Form.Group>
+        <Select options={options} isMulti={true} ref={categoriesRef}></Select>
         <Button variant="dark" type="submit">
           Create product
         </Button>
