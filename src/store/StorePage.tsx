@@ -6,7 +6,10 @@ const StorePage = () => {
   const nav = useNavigate();
   return (
     <>
-      <Navbar data-bs-theme="dark" className="border-bottom p-0">
+      <Navbar
+        data-bs-theme="dark"
+        className="border-bottom p-0 bg-secondary bg-gradient"
+      >
         <Nav justify variant="tabs" style={{ width: "50%" }}>
           <Nav.Item>
             <Nav.Link href="/" active={true}>
