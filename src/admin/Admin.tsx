@@ -1,32 +1,35 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
 const Admin = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div className="navbar-nav">
-            <Link className="nav-link" to="/admin">
+      <Navbar data-bs-theme="dark" className="border-bottom p-0">
+        <Nav justify variant="tabs" style={{ width: "50%" }}>
+          <Nav.Item>
+            <Nav.Link eventKey="products" href="/admin" active={true}>
               Products
-            </Link>
-            <Link className="nav-link" to="/admin/categories">
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              eventKey="categories"
+              href="/admin/categories"
+              active={true}
+            >
               Categories
-            </Link>
-          </div>
-        </div>
-      </nav>
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Container>
+          <Button className="ms-auto" variant="dark">
+            Log out
+          </Button>
+        </Container>
+        {""}
+      </Navbar>
+
       <Outlet />
     </>
   );
