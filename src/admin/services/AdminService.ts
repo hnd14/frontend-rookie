@@ -66,7 +66,7 @@ export async function createNewProducts(data: NewProductItem) {
 }
 
 export async function updateProduct(id: number, data: NewProductItem) {
-  return axios.put(STORE_BACK_API + "/categories/" + id.toString(), data, {
+  return axios.put(STORE_BACK_API + "/products/" + id.toString(), data, {
     withCredentials: true,
   });
 }

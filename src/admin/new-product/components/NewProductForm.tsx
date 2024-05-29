@@ -42,12 +42,12 @@ const NewProductForm = () => {
     setValidated(true);
   };
   const options = data.content.map((category) => {
-    console.log(category);
     return {
       value: category.id,
       label: category.name,
     };
   });
+
   return (
     <div className="container">
       <h1>New product</h1>

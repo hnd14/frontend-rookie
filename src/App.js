@@ -9,6 +9,7 @@ import CategoryPage from "./admin/category/CategoryPage.tsx";
 import ProductPage from "./admin/product/ProductPage.tsx";
 import NewCategoryPage from "./admin/new-category/NewCategoryPage.tsx";
 import NewProductPage from "./admin/new-product/NewProductPage.tsx";
+import ProductDetailsPage from "./admin/product-detail/ProductDetailsPage.tsx";
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
           <Route index path="/admin" Component={ProductPage} />
           <Route path="/admin/categories" Component={CategoryPage} />
           <Route path="/admin/new-categories" Component={NewCategoryPage} />
+          <Route
+            path="/admin/products/:productId"
+            Component={ProductDetailsPage}
+          />
           <Route path="/admin/new-product" Component={NewProductPage} />
         </Route>
       </Routes>
