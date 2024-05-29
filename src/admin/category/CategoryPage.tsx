@@ -8,7 +8,6 @@ const CategoryPage = () => {
       <Link className="btn btn-dark m-1 " to="/admin/new-categories">
         Create new category
       </Link>
-
       <CategoriesList />
     </>
   );

@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { createNewCategory } from "../../services/AdminService.ts";
 import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 const NewCategoryForm = () => {
   const nameRef = useRef(null);
@@ -22,31 +23,34 @@ const NewCategoryForm = () => {
       });
   };
   return (
-    <form className="border" onSubmit={handleSubmit}>
-      <div className="form-group">
-        <label htmlFor="categoryName" className="form-label">
-          Category Name
-        </label>
-        <input
-          className="form-control"
-          type="text"
-          id="categoryName"
-          ref={nameRef}
-        />
-        <label htmlFor="categoryDesc" className="form-label">
-          Category descriptions
-        </label>
-        <input
-          className="form-control"
-          type="text"
-          id="categoryDesc"
-          ref={descRef}
-        />
-      </div>
-      <button className="btn btn-primary m-1" type="submit">
-        Create new category
-      </button>
-    </form>
+    <Container>
+      <h1>New Category</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="categoryName" className="form-label">
+            Category Name
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            id="categoryName"
+            ref={nameRef}
+          />
+          <label htmlFor="categoryDesc" className="form-label">
+            Category descriptions
+          </label>
+          <input
+            className="form-control"
+            type="text"
+            id="categoryDesc"
+            ref={descRef}
+          />
+        </div>
+        <button className="btn btn-dark m-1" type="submit">
+          Create new category
+        </button>
+      </form>
+    </Container>
   );
 };
 
