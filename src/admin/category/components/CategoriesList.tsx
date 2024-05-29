@@ -5,7 +5,7 @@ import {
 } from "../../services/AdminService.ts";
 import useSWR from "swr";
 import CategoryRow from "./CategoryRow.tsx";
-import { Pagination } from "react-bootstrap";
+import { Pagination, Table } from "react-bootstrap";
 
 const CategoriesList = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -41,7 +41,7 @@ const CategoriesList = () => {
   }
   return (
     <>
-      <table className="table">
+      <Table variant="dark" striped bordered hover>
         <thead>
           <tr>
             <th>Id</th>
@@ -51,6 +51,7 @@ const CategoriesList = () => {
             <th>Creation time</th>
             <th>Last modified by</th>
             <th>Last modified time</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -58,7 +59,7 @@ const CategoriesList = () => {
             <CategoryRow category={category} handleDelete={handleDelete} />
           ))}
         </tbody>
-      </table>
+      </Table>
       <Pagination>{items}</Pagination>
     </>
   );

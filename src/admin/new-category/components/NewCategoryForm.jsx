@@ -22,7 +22,7 @@ const NewCategoryForm = () => {
       });
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="border" onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="categoryName" className="form-label">
           Category Name
@@ -43,7 +43,7 @@ const NewCategoryForm = () => {
           ref={descRef}
         />
       </div>
-      <button className="btn btn-primary" type="submit">
+      <button className="btn btn-primary m-1" type="submit">
         Create new category
       </button>
     </form>

@@ -9,7 +9,7 @@ interface Props {
   handleClose;
 }
 const CategoryEditForm = ({ category, show, handleClose }: Props) => {
-  const descRef = useRef(null);
+  const descRef = useRef(document.createElement("input"));
   const handleSubmit = (event) => {
     event.preventDefault();
     const descValue = descRef.current.value;

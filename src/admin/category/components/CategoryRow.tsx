@@ -19,20 +19,22 @@ const CategoryRow = ({ category, handleDelete }: Props) => {
         <td>{category.createdTime}</td>
         <td>{category.updatedBy}</td>
         <td>{category.updatedTime}</td>
-        <button
-          onClick={() => {
-            setShowEdit(true);
-          }}
-        >
-          Edit
-        </button>
-        <button
-          onClick={() => {
-            handleDelete(category.id);
-          }}
-        >
-          Delete
-        </button>
+        <td>
+          <button
+            onClick={() => {
+              setShowEdit(true);
+            }}
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => {
+              handleDelete(category.id);
+            }}
+          >
+            Delete
+          </button>
+        </td>
       </tr>
       <CategoryEditForm
         category={category}
