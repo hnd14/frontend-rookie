@@ -10,13 +10,19 @@ import ProductPage from "./admin/product/ProductPage.tsx";
 import NewCategoryPage from "./admin/new-category/NewCategoryPage.tsx";
 import NewProductPage from "./admin/new-product/NewProductPage.tsx";
 import ProductDetailsPage from "./admin/product-detail/ProductDetailsPage.tsx";
+import StorePage from "./store/StorePage.tsx";
+import SignupPage from "./store/sign-up/SignupPage.tsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path="/" exact Component={Home} />
-        <Route path="/login" Component={LoginPage} />
+        <Route path="/" exact Component={StorePage}>
+          <Route path="/" Component={Home}></Route>
+          <Route path="/login" Component={LoginPage} />
+          <Route path="/signup" Component={SignupPage} />
+        </Route>
+
         <Route path="/admin" Component={Admin}>
           <Route index path="/admin" Component={ProductPage} />
           <Route path="/admin/categories" Component={CategoryPage} />
