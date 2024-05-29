@@ -1,8 +1,10 @@
 import React from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
+import { logout } from "../login/services/LoginService.ts";
 
 const Admin = () => {
+  const nav = useNavigate();
   return (
     <>
       <Navbar data-bs-theme="dark" className="border-bottom p-0">
@@ -23,7 +25,15 @@ const Admin = () => {
           </Nav.Item>
         </Nav>
         <Container>
-          <Button className="ms-auto" variant="dark">
+          <Button
+            className="ms-auto"
+            variant="dark"
+            onClick={() => {
+              logout().then(() => {
+                nav("/");
+              });
+            }}
+          >
             Log out
           </Button>
         </Container>
