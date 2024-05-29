@@ -49,7 +49,7 @@ const NewProductForm = () => {
   });
 
   return (
-    <div className="container">
+    <div className="container" style={{ "max-width": "800px" }}>
       <h1>New product</h1>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productName">
@@ -75,8 +75,12 @@ const NewProductForm = () => {
           <Form.Check.Label>Featured</Form.Check.Label>
           <Form.Check></Form.Check>
         </Form.Group>
-        <Select options={options} isMulti={true} ref={categoriesRef}></Select>
-        <Button variant="dark" type="submit">
+        <Form.Group>
+          <Form.Label>Categories</Form.Label>
+          <Select options={options} isMulti={true} ref={categoriesRef}></Select>
+        </Form.Group>
+
+        <Button variant="dark" type="submit" className="mt-3">
           Create product
         </Button>
       </Form>
