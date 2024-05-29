@@ -1,13 +1,14 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
-import { LoginPage } from "./admin/login/LoginPage.tsx";
+import { LoginPage } from "./login/LoginPage.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./store/home/Home.tsx";
 import Admin from "./admin/Admin.tsx";
 import CategoryPage from "./admin/category/CategoryPage.tsx";
 import ProductPage from "./admin/product/ProductPage.tsx";
 import NewCategoryPage from "./admin/new-category/NewCategoryPage.tsx";
+import NewProductPage from "./admin/new-product/NewProductPage.tsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route index path="/admin" Component={ProductPage} />
           <Route path="/admin/categories" Component={CategoryPage} />
           <Route path="/admin/new-categories" Component={NewCategoryPage} />
+          <Route path="/admin/new-product" Component={NewProductPage} />
         </Route>
       </Routes>
     </BrowserRouter>
