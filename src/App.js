@@ -11,7 +11,7 @@ import NewCategoryPage from "./admin/new-category/NewCategoryPage.tsx";
 import NewProductPage from "./admin/new-product/NewProductPage.tsx";
 import ProductDetailsPage from "./admin/product-detail/ProductDetailsPage.tsx";
 import StorePage from "./store/StorePage.tsx";
-import SignupPage from "./store/sign-up/SignupPage.tsx";
+import SignUpPage from "./store/sign-up/SignupPage.tsx";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="/" exact Component={StorePage}>
           <Route path="/" Component={Home}></Route>
           <Route path="/login" Component={LoginPage} />
-          <Route path="/signup" Component={SignupPage} />
+          <Route path="/signup" Component={SignUpPage} />
         </Route>
 
         <Route path="/admin" Component={Admin}>
