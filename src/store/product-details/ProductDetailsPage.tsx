@@ -14,7 +14,6 @@ const ProductDetailsCustomerPage = () => {
 
   if (error) return <h1>Error</h1>;
   if (isLoading) return <h1>Loading...</h1>;
-  console.log(data);
   const categories = data.categories.map((category) => {
     return {
       value: null,

@@ -32,7 +32,6 @@ const ProductCarousel = ({ data, title = "" }: Props) => {
   const handleSelect = (selectedIndex) => {
     setIndex(selectedIndex);
   };
-  console.log(cardsPerSlide);
 
   const cards = data.map((product) => <ProductCard data={product} />);
 

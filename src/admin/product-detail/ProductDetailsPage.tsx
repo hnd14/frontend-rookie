@@ -58,7 +58,6 @@ const ProductDetailsPage = () => {
           return catOption.value;
         }),
       };
-      console.log(data);
       updateProduct(Number(productId), data)
         .then(() => {
           alert("Update product successfully!");

@@ -22,7 +22,6 @@ const SearchBar = () => {
     ["/categories", params],
     ([url, params]) => storeFetcher(url, params)
   );
-  console.log(category_id);
   if (error) return <h1>Error</h1>;
   if (isLoading) return <h1>Loading</h1>;
   const handleSearch = () => {

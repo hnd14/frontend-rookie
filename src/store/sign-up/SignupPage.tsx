@@ -14,7 +14,6 @@ const SignUpPage = () => {
     if (form.checkValidity() === false || password != passwordRe) {
       event.stopPropagation();
     } else {
-      console.log("HELLO");
       const data: SignUpData = {
         username: document.getElementById("username")?.value,
         password: password,

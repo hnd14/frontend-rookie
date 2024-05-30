@@ -34,7 +34,6 @@ const NewProductForm = () => {
           return catOption.value;
         }),
       };
-      console.log(data);
       createNewProducts(data)
         .then(() => {
           alert("Create product sucessfully");
