@@ -1,24 +1,6 @@
-import { LoginData } from "../../login/model/LoginData";
 import axios from "axios";
 import { NewProductItem } from "../product/model/NewProductItem";
-
-const STORE_BACK_API = "http://localhost:8080/store-back";
-
-export async function login(data: LoginData) {
-  const response = await axios.post(
-    "http://localhost:8080/auth/sign-in",
-    data,
-    {
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-      withCredentials: true,
-    }
-  );
-
-  return response;
-}
+import { STORE_BACK_API } from "../../const/Util.ts";
 
 export const getAllCategories = (pageNumber: number) => {
   return axios
