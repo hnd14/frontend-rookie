@@ -16,7 +16,6 @@ const NewProductForm = () => {
     getAllCategories(arg)
   );
   const nav = useNavigate();
-
   if (error) return <h1>Error</h1>;
   if (isLoading) return <h1>Loading...</h1>;
   const handleSubmit = (event) => {

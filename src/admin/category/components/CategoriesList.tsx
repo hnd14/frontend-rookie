@@ -5,7 +5,7 @@ import {
 } from "../../services/AdminService.ts";
 import useSWR from "swr";
 import CategoryRow from "./CategoryRow.tsx";
-import { Pagination, Table } from "react-bootstrap";
+import { Container, Pagination, Table } from "react-bootstrap";
 
 const CategoriesList = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -60,7 +60,9 @@ const CategoriesList = () => {
           ))}
         </tbody>
       </Table>
-      <Pagination>{items}</Pagination>
+      <Container className="d-flex justify-content-center">
+        <Pagination>{items}</Pagination>
+      </Container>
     </>
   );
 };

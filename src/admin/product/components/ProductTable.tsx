@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Pagination, Table } from "react-bootstrap";
+import { Container, Pagination, Table } from "react-bootstrap";
 import useSWR from "swr";
 import { deleteProduct, getAllProducts } from "../../services/AdminService.ts";
 import ProductRow from "./ProductRow.tsx";
@@ -58,7 +58,9 @@ const ProductTable = () => {
           ))}
         </tbody>
       </Table>
-      <Pagination>{items}</Pagination>
+      <Container className="d-flex justify-content-center">
+        <Pagination>{items}</Pagination>
+      </Container>
     </>
   );
 };
