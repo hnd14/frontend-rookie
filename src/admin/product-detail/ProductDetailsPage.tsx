@@ -74,12 +74,8 @@ const ProductDetailsPage = () => {
   };
   return (
     <div className="container">
-      <h1>New product</h1>
+      <h1>{data.name}</h1>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
-        <Form.Group controlId="productName">
-          <Form.Label>Product Name</Form.Label>
-          <Form.Control required type="text" value={data.name} disabled />
-        </Form.Group>
         <Form.Group controlId="productDesc">
           <Form.Label>Product Descriptions</Form.Label>
           <Form.Control type="text" defaultValue={data.desc} />
@@ -101,7 +97,7 @@ const ProductDetailsPage = () => {
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
           <Form.Check.Label>Featured</Form.Check.Label>
-          <Form.Check checked={data.isFeatured}></Form.Check>
+          <Form.Check defaultChecked={data.isFeatured}></Form.Check>
         </Form.Group>
         <Select
           options={options}
