@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { login } from "../services/LoginService.ts";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../App.js";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const usernameRef = useRef(document.createElement("input"));
   const passwordRef = useRef(document.createElement("input"));
+  const { setAuth } = useContext(AuthContext);
 
   const validateData = (username, password) => {
     if (username.length < 1) {
@@ -28,10 +30,19 @@ const LoginForm = () => {
       };
       login(data)
         .then((response) => {
-          console.log(response.data.isAdmin);
-          if (response.data.isAdmin) {
+          console.log(response.data);
+          const authData = {};
+          authData.user = response.data.username;
+          authData.isAuthenticated = response.data.isAuthenticated;
+          authData.roles = response.data.roles;
+          console.log(authData);
+          setAuth(authData);
+          console.log("hi");
+          if (response.data.roles.includes("ROLE_ADMIN")) {
+            console.log("Hi");
             navigate("/admin");
           } else {
+            console.log("Hello");
             navigate("/");
           }
         })
