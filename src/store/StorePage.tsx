@@ -17,7 +17,7 @@ const StorePage = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/" active={true}>
+            <Nav.Link href="/products" active={true}>
               Store
             </Nav.Link>
           </Nav.Item>

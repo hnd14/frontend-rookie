@@ -13,6 +13,7 @@ import ProductDetailsPage from "./admin/product-detail/ProductDetailsPage.tsx";
 import StorePage from "./store/StorePage.tsx";
 import SignUpPage from "./store/sign-up/SignupPage.tsx";
 import ProductDetailsCustomerPage from "./store/product-details/ProductDetailsPage.tsx";
+import ProductsListPage from "./store/products-list/ProductsListPage.tsx";
 
 function App() {
   return (
@@ -22,6 +23,9 @@ function App() {
           <Route path="/" Component={Home}></Route>
           <Route path="/login" Component={LoginPage} />
           <Route path="/signup" Component={SignUpPage} />
+          <Route path="/products" Component={ProductsListPage}>
+            {" "}
+          </Route>
           <Route
             path="/products/:productId"
             Component={ProductDetailsCustomerPage}
