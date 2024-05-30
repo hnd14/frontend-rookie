@@ -1,15 +1,19 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import ProductCarousel from "../components/ProductCarousel.tsx";
+import { storeFetcher } from "../services/CustomerServices.ts";
+import useSWR from "swr";
 
 const Home = () => {
+  const { data, error, isLoading } = useSWR("/products", storeFetcher);
+  if (error) return <h1>Error</h1>;
+  if (isLoading) return <h1>Loading</h1>;
+
   return (
-    <Container>
-      <Row></Row>
-      <Row>
-        <Col xs={4}></Col>
-        <Col xs={8}></Col>
-      </Row>
-    </Container>
+    <>
+      <h1>Welcome!</h1>
+      <ProductCarousel data={data} />
+    </>
   );
 };
 
