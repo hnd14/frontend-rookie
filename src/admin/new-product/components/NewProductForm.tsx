@@ -7,6 +7,7 @@ import {
   getAllCategories,
 } from "../../services/AdminService.ts";
 import useSWR from "swr";
+import { useNavigate } from "react-router-dom";
 
 const NewProductForm = () => {
   const [validated, setValidated] = useState(false);
@@ -14,6 +15,7 @@ const NewProductForm = () => {
   const { data, error, isLoading } = useSWR(["/categories", 1], ([url, arg]) =>
     getAllCategories(arg)
   );
+  const nav = useNavigate();
 
   if (error) return <h1>Error</h1>;
   if (isLoading) return <h1>Loading...</h1>;
@@ -34,9 +36,15 @@ const NewProductForm = () => {
         }),
       };
       console.log(data);
-      createNewProducts(data).then(() => {
-        alert("Create product sucessfully");
-      });
+      createNewProducts(data)
+        .then(() => {
+          alert("Create product sucessfully");
+          nav("/admin");
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("Failed to create product");
+        });
     }
 
     setValidated(true);
