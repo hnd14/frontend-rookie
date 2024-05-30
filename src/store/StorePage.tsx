@@ -12,17 +12,17 @@ const StorePage = () => {
       >
         <Nav justify variant="tabs" style={{ width: "50%" }}>
           <Nav.Item>
-            <Nav.Link href="/" active={true}>
+            <Nav.Link onClick={() => nav("/")} active={true}>
               Home
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link href="/products" active={true}>
+            <Nav.Link onClick={() => nav("/products")} active={true}>
               Store
             </Nav.Link>
           </Nav.Item>
           <NavItem>
-            <Nav.Link href="/" active={true}>
+            <Nav.Link onClick={() => nav("/")} active={true}>
               Contact
             </Nav.Link>
           </NavItem>

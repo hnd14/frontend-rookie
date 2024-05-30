@@ -13,15 +13,19 @@ const Admin = () => {
       >
         <Nav justify variant="tabs" style={{ width: "50%" }}>
           <Nav.Item>
-            <Nav.Link eventKey="products" href="/admin" active={true}>
+            <Nav.Link
+              eventKey="products"
+              onClick={() => nav("/admin")}
+              active={true}
+            >
               Products
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link
               eventKey="categories"
-              href="/admin/categories"
               active={true}
+              onClick={() => nav("/admin/categories")}
             >
               Categories
             </Nav.Link>
