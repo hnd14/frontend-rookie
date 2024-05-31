@@ -15,34 +15,44 @@ import SignUpPage from "./store/sign-up/SignupPage.tsx";
 import ProductDetailsCustomerPage from "./store/product-details/ProductDetailsPage.tsx";
 import ProductsListPage from "./store/products-list/ProductsListPage.tsx";
 import RouteProtector from "./components/RouteProtector.tsx";
+import PersistentLogin from "./components/PersistentLogin.tsx";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" exact Component={StorePage}>
-          <Route path="/" Component={Home}></Route>
-          <Route path="/login" Component={LoginPage} />
-          <Route path="/signup" Component={SignUpPage} />
-          <Route path="/products" Component={ProductsListPage}>
-            {" "}
+        <Route Component={PersistentLogin}>
+          <Route path="/" exact Component={StorePage}>
+            <Route path="/" Component={Home}></Route>
+            <Route path="/login" Component={LoginPage} />
+            <Route path="/signup" Component={SignUpPage} />
+            <Route path="/products" Component={ProductsListPage}>
+              {" "}
+            </Route>
+            <Route
+              path="/products/:productId"
+              Component={ProductDetailsCustomerPage}
+            />
           </Route>
           <Route
-            path="/products/:productId"
-            Component={ProductDetailsCustomerPage}
-          />
-        </Route>
-        <Route element={<RouteProtector></RouteProtector>}>
-          <Route>
-            <Route path="/admin" Component={Admin}>
-              <Route index path="/admin" Component={ProductPage} />
-              <Route path="/admin/categories" Component={CategoryPage} />
-              <Route path="/admin/new-categories" Component={NewCategoryPage} />
-              <Route
-                path="/admin/products/:productId"
-                Component={ProductDetailsPage}
-              />
-              <Route path="/admin/new-product" Component={NewProductPage} />
+            element={
+              <RouteProtector allowedRoles={["ROLE_ADMIN"]}></RouteProtector>
+            }
+          >
+            <Route>
+              <Route path="/admin" Component={Admin}>
+                <Route index path="/admin" Component={ProductPage} />
+                <Route path="/admin/categories" Component={CategoryPage} />
+                <Route
+                  path="/admin/new-categories"
+                  Component={NewCategoryPage}
+                />
+                <Route
+                  path="/admin/products/:productId"
+                  Component={ProductDetailsPage}
+                />
+                <Route path="/admin/new-product" Component={NewProductPage} />
+              </Route>
             </Route>
           </Route>
         </Route>

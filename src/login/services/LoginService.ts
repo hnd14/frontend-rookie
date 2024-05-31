@@ -19,3 +19,9 @@ export async function logout() {
     withCredentials: true,
   });
 }
+
+export async function verify() {
+  return axios
+    .get(AUTH_API + "/verify", { withCredentials: true })
+    .then((res) => res.data);
+}
