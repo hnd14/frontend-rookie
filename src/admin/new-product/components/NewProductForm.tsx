@@ -24,23 +24,23 @@ const NewProductForm = () => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
+      const formData = new FormData(form);
       const data: NewProductItem = {
-        name: document.getElementById("productName")?.value,
-        desc: document.getElementById("productDesc")?.value,
-        salePrice: document.getElementById("productPrice")?.value,
-        stock: document.getElementById("productStock")?.value,
-        isFeatured: document.getElementById("productIsFeatured")?.checked,
+        name: formData.get("name")?.toString() || "",
+        desc: formData.get("desc")?.toString() || "",
+        salePrice: Number(formData.get("price") * 1000),
+        stock: Number(formData.get("stock")),
+        isFeatured: Boolean(formData.get("featured")),
         categoriesId: categoriesRef.current.getValue().map((catOption) => {
           return catOption.value;
         }),
       };
       createNewProducts(data)
-        .then(() => {
+        .then((res) => {
           alert("Create product sucessfully");
-          nav("/admin");
+          nav("/admin/products/images/" + res.data.id.toString());
         })
         .catch((error) => {
-          console.log(error);
           alert("Failed to create product");
         });
     }
@@ -60,26 +60,27 @@ const NewProductForm = () => {
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productName">
           <Form.Label>Product Name</Form.Label>
-          <Form.Control required type="text" />
+          <Form.Control required type="text" name="name" />
         </Form.Group>
         <Form.Group controlId="productDesc">
           <Form.Label>Product Descriptions</Form.Label>
-          <Form.Control type="text" />
+          <Form.Control type="text" name="desc" />
         </Form.Group>
         <Form.Group controlId="productPrice">
-          <Form.Label>Price</Form.Label>
+          <Form.Label name="price">Price</Form.Label>
           <InputGroup>
-            <Form.Control required type="number" />
+            <Form.Control required type="number" name="price" />
+            <InputGroup.Text>000</InputGroup.Text>
             <InputGroup.Text>VND</InputGroup.Text>
           </InputGroup>
         </Form.Group>
         <Form.Group controlId="productStock">
           <Form.Label>Stock</Form.Label>
-          <Form.Control required defaultValue={0} type="number" />
+          <Form.Control required defaultValue={0} type="number" name="stock" />
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
           <Form.Check.Label>Featured</Form.Check.Label>
-          <Form.Check></Form.Check>
+          <Form.Check name="featured"></Form.Check>
         </Form.Group>
         <Form.Group>
           <Form.Label>Categories</Form.Label>

@@ -15,7 +15,6 @@ const ProductTable = ({ data, mutate }) => {
         alert("Failed to delete product!");
       });
   };
-  console.log(data);
 
   return (
     <>

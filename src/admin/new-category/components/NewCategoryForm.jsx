@@ -17,7 +17,6 @@ const NewCategoryForm = () => {
         nav("/admin/categories");
       })
       .catch((error) => {
-        console.log(error);
         alert(error.response.data.detail);
         nav("/admin/new-categories");
       });

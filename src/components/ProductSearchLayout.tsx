@@ -67,7 +67,13 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
       <Pagination.Item
         key={number}
         active={number === pageNumber}
-        onClick={() => setPageNumber(number)}
+        onClick={() => {
+          setSearchParams((p) => {
+            p.set("pageNumber", number.toString());
+            setPageNumber(number);
+            return p;
+          });
+        }}
       >
         {number}
       </Pagination.Item>

@@ -16,6 +16,7 @@ import ProductsListPage from "./store/products-list/ProductsListPage.tsx";
 import RouteProtector from "./components/RouteProtector.tsx";
 import PersistentLogin from "./components/PersistentLogin.tsx";
 import ProductPageV2 from "./admin/product/ProductPageV2.tsx";
+import ImageUploadPage from "./admin/image-page/ImageUploadPage.tsx";
 
 function App() {
   return (
@@ -26,9 +27,7 @@ function App() {
             <Route path="/" Component={Home}></Route>
             <Route path="/login" Component={LoginPage} />
             <Route path="/signup" Component={SignUpPage} />
-            <Route path="/products" Component={ProductsListPage}>
-              {" "}
-            </Route>
+            <Route path="/products" Component={ProductsListPage} />
             <Route
               path="/products/:productId"
               Component={ProductDetailsCustomerPage}
@@ -50,6 +49,10 @@ function App() {
                 <Route
                   path="/admin/products/:productId"
                   Component={ProductDetailsPage}
+                />
+                <Route
+                  path="/admin/products/images/:productId"
+                  Component={ImageUploadPage}
                 />
                 <Route path="/admin/new-product" Component={NewProductPage} />
               </Route>

@@ -11,7 +11,6 @@ const ProductCard = ({ data }: Props) => {
   const handleClick = () => {
     nav(`/products/${data.id}`);
   };
-  console.log(IMAGES_HOST + data.thumbnailUrl);
   return (
     <Card
       style={{ width: "17rem" }}
@@ -22,6 +21,7 @@ const ProductCard = ({ data }: Props) => {
         variant="top"
         src={IMAGES_HOST + data.thumbnailUrl}
         alt={`Image for ${data.name}`}
+        style={{ height: "15rem" }}
       ></Card.Img>
       <CardTitle>{data.name}</CardTitle>
       <CardText>

@@ -9,7 +9,6 @@ const PersistentLogin = () => {
   useEffect(() => {
     verify()
       .then((res) => {
-        console.log(res);
         setAuth(res);
         setIsLoading(false);
       })
