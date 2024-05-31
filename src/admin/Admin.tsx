@@ -30,6 +30,11 @@ const Admin = () => {
               Categories
             </Nav.Link>
           </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="store" active={true} onClick={() => nav("/")}>
+              Store
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
         <LogOutButton />
         {""}

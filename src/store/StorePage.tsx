@@ -24,6 +24,15 @@ const StorePage = () => {
               Store
             </Nav.Link>
           </Nav.Item>
+          {auth.roles?.includes("ROLE_ADMIN") ? (
+            <Nav.Item>
+              <Nav.Link onClick={() => nav("/admin")} active={true}>
+                Admin
+              </Nav.Link>
+            </Nav.Item>
+          ) : (
+            <></>
+          )}
           <NavItem>
             <Nav.Link onClick={() => nav("/")} active={true}>
               Contact
