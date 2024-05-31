@@ -55,7 +55,7 @@ const NewProductForm = () => {
   });
 
   return (
-    <div className="container" style={{ "max-width": "800px" }}>
+    <div className="container" style={{ maxWidth: "800px" }}>
       <h1>New product</h1>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productName">
