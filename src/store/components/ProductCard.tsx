@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Card, CardText, CardTitle } from "react-bootstrap";
 import { ProductThumbnail } from "../model/Product";
 import { useNavigate } from "react-router-dom";
+import { IMAGES_HOST } from "../../const/Util.ts";
 interface Props {
   data: ProductThumbnail;
 }
@@ -10,6 +11,7 @@ const ProductCard = ({ data }: Props) => {
   const handleClick = () => {
     nav(`/products/${data.id}`);
   };
+  console.log(IMAGES_HOST + data.thumbnailUrl);
   return (
     <Card
       style={{ width: "17rem" }}
@@ -18,7 +20,7 @@ const ProductCard = ({ data }: Props) => {
     >
       <Card.Img
         variant="top"
-        src={data.thumbnail_src}
+        src={IMAGES_HOST + data.thumbnailUrl}
         alt={`Image for ${data.name}`}
       ></Card.Img>
       <CardTitle>{data.name}</CardTitle>

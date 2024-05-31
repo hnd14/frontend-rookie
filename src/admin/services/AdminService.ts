@@ -72,3 +72,25 @@ export const adminFetcher = (url, params) => {
     .get(STORE_BACK_API + url, { params: params, withCredentials: true })
     .then((res) => res.data);
 };
+
+export const postImages = (images, productId) => {
+  const data = new FormData();
+  data.set("file", images);
+  data.set("productId", productId);
+  return axios.post(STORE_BACK_API + "/images/upload", data, {
+    headers: {
+      "content-type": "multipart/form-data",
+    },
+    withCredentials: true,
+  });
+};
+
+export const postThumbnail = (data) => {
+  for (const [key, value] of data) {
+    console.log(`${key}: ${value}\n`);
+  }
+  return axios.post(STORE_BACK_API + "/images/thumnails/upload", data, {
+    headers: {},
+    withCredentials: true,
+  });
+};
