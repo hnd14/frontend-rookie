@@ -108,19 +108,23 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
       </Col>
 
       <Col xs={9}>
-        <Form.Select
-          onChange={(e) => {
-            setSearchParams((p) => {
-              p.set("pageSize", e.target.value);
-              return p;
-            });
-          }}
-          defaultValue={searchParams.get("pageSize") || "10"}
-        >
-          <option value={5}>5 items/page</option>
-          <option value={10}>10 items/page</option>
-          <option value={20}>20 items/page</option>
-        </Form.Select>
+        <Row className="d-flex justify-content-end">
+          <Col xs={3}>
+            <Form.Select
+              onChange={(e) => {
+                setSearchParams((p) => {
+                  p.set("pageSize", e.target.value);
+                  return p;
+                });
+              }}
+              defaultValue={searchParams.get("pageSize") || "10"}
+            >
+              <option value={5}>5 items/page</option>
+              <option value={10}>10 items/page</option>
+              <option value={20}>20 items/page</option>
+            </Form.Select>
+          </Col>
+        </Row>
         <Row>{displayer({ data, mutate })}</Row>
         <Container className="d-flex justify-content-center">
           <Pagination>{items}</Pagination>
