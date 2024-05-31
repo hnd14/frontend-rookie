@@ -8,9 +8,10 @@ const ProductPageTest = () => {
     <>
       <ProductSearchLayout
         fetcher={storeFetcher}
-        displayer={(data) =>
-          data.data.content.map((product) => <ProductCard data={product} />)
-        }
+        displayer={({ data }) => {
+          console.log(data);
+          return data.content.map((product) => <ProductCard data={product} />);
+        }}
       />
     </>
   );

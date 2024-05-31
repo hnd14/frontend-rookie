@@ -10,7 +10,13 @@ import {
   Pagination,
   Row,
 } from "react-bootstrap";
-const ProductSearchLayout = ({ fetcher, displayer }) => {
+
+interface Props {
+  fetcher: any;
+  displayer: ({ data, mutate }) => React.JSX.Element;
+}
+
+const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const nameRef = useRef(document.createElement("input"));
   const minPriceRef = useRef(document.createElement("input"));
@@ -23,7 +29,7 @@ const ProductSearchLayout = ({ fetcher, displayer }) => {
     pageSize: searchParams.get("pageSize"),
     pageNumber: searchParams.get("pageNumber"),
   };
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     ["/products", params],
     ([url, params]) => fetcher(url, params)
   );
@@ -115,7 +121,7 @@ const ProductSearchLayout = ({ fetcher, displayer }) => {
           <option value={10}>10 items/page</option>
           <option value={20}>20 items/page</option>
         </Form.Select>
-        <Row>{displayer({ data })}</Row>
+        <Row>{displayer({ data, mutate })}</Row>
         <Container className="d-flex justify-content-center">
           <Pagination>{items}</Pagination>
         </Container>

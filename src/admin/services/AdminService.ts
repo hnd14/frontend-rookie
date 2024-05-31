@@ -66,3 +66,9 @@ export const getProducts = (id: string) => {
     })
     .then((res) => res.data);
 };
+
+export const adminFetcher = (url, params) => {
+  return axios
+    .get(STORE_BACK_API + url, { params: params, withCredentials: true })
+    .then((res) => res.data);
+};

@@ -6,7 +6,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./store/home/Home.tsx";
 import Admin from "./admin/Admin.tsx";
 import CategoryPage from "./admin/category/CategoryPage.tsx";
-import ProductPage from "./admin/product/ProductPage.tsx";
 import NewCategoryPage from "./admin/new-category/NewCategoryPage.tsx";
 import NewProductPage from "./admin/new-product/NewProductPage.tsx";
 import ProductDetailsPage from "./admin/product-detail/ProductDetailsPage.tsx";
@@ -16,6 +15,7 @@ import ProductDetailsCustomerPage from "./store/product-details/ProductDetailsPa
 import ProductsListPage from "./store/products-list/ProductsListPage.tsx";
 import RouteProtector from "./components/RouteProtector.tsx";
 import PersistentLogin from "./components/PersistentLogin.tsx";
+import ProductPageV2 from "./admin/product/ProductPageV2.tsx";
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
           >
             <Route>
               <Route path="/admin" Component={Admin}>
-                <Route index path="/admin" Component={ProductPage} />
+                <Route index path="/admin" Component={ProductPageV2} />
                 <Route path="/admin/categories" Component={CategoryPage} />
                 <Route
                   path="/admin/new-categories"
