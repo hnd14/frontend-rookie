@@ -1,7 +1,7 @@
 import React from "react";
-import { Button, Container, Nav, Navbar } from "react-bootstrap";
+import { Nav, Navbar } from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
-import { logout } from "../login/services/LoginService.ts";
+import LogOutButton from "../components/LogOutButton.tsx";
 
 const Admin = () => {
   const nav = useNavigate();
@@ -31,19 +31,7 @@ const Admin = () => {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-        <Container>
-          <Button
-            className="ms-auto"
-            variant="dark"
-            onClick={() => {
-              logout().then(() => {
-                nav("/");
-              });
-            }}
-          >
-            Log out
-          </Button>
-        </Container>
+        <LogOutButton />
         {""}
       </Navbar>
 

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navbar, Nav, Container, Button, NavItem } from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthProvider";
+import LogOutButton from "../components/LogOutButton.tsx";
 
 const StorePage = () => {
   const nav = useNavigate();
+  const { auth } = useContext(AuthContext);
   return (
     <>
       <Navbar
@@ -27,27 +30,31 @@ const StorePage = () => {
             </Nav.Link>
           </NavItem>
         </Nav>
-        <Container className="ms-auto">
-          <Button
-            className="ms-auto me-1"
-            variant="dark"
-            onClick={() => {
-              nav("/login");
-            }}
-          >
-            Log in
-          </Button>{" "}
-          <Button
-            className="ms-1"
-            variant="dark"
-            onClick={() => {
-              nav("/signup");
-            }}
-          >
-            Sign up
-          </Button>
-          {""}
-        </Container>
+        {auth.isAuthenticated ? (
+          <LogOutButton />
+        ) : (
+          <Container className="ms-auto">
+            <Button
+              className="ms-auto me-1"
+              variant="dark"
+              onClick={() => {
+                nav("/login");
+              }}
+            >
+              Log in
+            </Button>{" "}
+            <Button
+              className="ms-1"
+              variant="dark"
+              onClick={() => {
+                nav("/signup");
+              }}
+            >
+              Sign up
+            </Button>
+            {""}
+          </Container>
+        )}
       </Navbar>
 
       <Outlet />
