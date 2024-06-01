@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { SignUpData } from "./model/SignUpData";
 import { signUp } from "../services/CustomerServices.ts";
-import { redirect } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const SignUpPage = () => {
   const [validated, setValidated] = useState(false);
+  const nav = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -22,7 +23,7 @@ const SignUpPage = () => {
       signUp(data)
         .then(() => {
           alert("Your account has been registered");
-          redirect("/login");
+          nav("/login");
         })
         .catch((error) => {
           alert("This username or emailed has been used!");
