@@ -30,7 +30,6 @@ const ImageUploadForm = ({ productId, next }) => {
   }, [data]);
 
   if (error) {
-    console.log(error);
     return <h1>Error</h1>;
   }
   if (isLoading) return <h1>Loading</h1>;
