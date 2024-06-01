@@ -6,7 +6,7 @@ import {
   getProducts,
   updateProduct,
 } from "../services/AdminService.ts";
-import { Form, InputGroup } from "react-bootstrap";
+import { Button, Form, InputGroup } from "react-bootstrap";
 import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
 import SubmitButton from "../../components/SubmitButton.jsx";
@@ -75,6 +75,14 @@ const ProductDetailsPage = () => {
   return (
     <div className="container">
       <h1>{data.name}</h1>
+      <Button
+        variant="dark"
+        onClick={() => {
+          nav(`/admin/products/images/${productId}`);
+        }}
+      >
+        Edit images data
+      </Button>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productDesc">
           <Form.Label>Product Descriptions</Form.Label>
