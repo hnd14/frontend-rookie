@@ -21,6 +21,7 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
   const nameRef = useRef(document.createElement("input"));
   const minPriceRef = useRef(document.createElement("input"));
   const maxPriceRef = useRef(document.createElement("input"));
+  const categoryRef = useRef(document.createElement("select"));
   const params = {
     name: searchParams.get("name"),
     categoriesId: searchParams.get("category"),
@@ -33,9 +34,14 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
     ["/products", params],
     ([url, params]) => fetcher(url, params)
   );
+  const {
+    data: cateData,
+    error: cateError,
+    isLoading: cateLoading,
+  } = useSWR(["/categories", params], ([url, params]) => fetcher(url, params));
   const [pageNumber, setPageNumber] = useState(1);
-  if (error) return <h1>Error</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (error || cateError) return <h1>Error</h1>;
+  if (isLoading || cateLoading) return <h1>Loading...</h1>;
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -56,6 +62,9 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
             ? maxPriceRef.current.value.toString() + "000"
             : "",
       };
+      if (categoryRef.current.value != "0") {
+        newSearchParams.category = categoryRef.current.value;
+      }
       setSearchParams(newSearchParams);
     }
   };
@@ -102,6 +111,20 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
                 <InputGroup.Text>000</InputGroup.Text>
                 <InputGroup.Text>VND</InputGroup.Text>
               </InputGroup>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Category</Form.Label>
+              <Form.Select
+                ref={categoryRef}
+                defaultValue={
+                  params.categoriesId ? Number(params.categoriesId) : 0
+                }
+              >
+                <option value={0}></option>
+                {cateData.content.map((category) => {
+                  return <option value={category.id}>{category.name}</option>;
+                })}
+              </Form.Select>
             </Form.Group>
             <Form.Group>
               <Form.Label>Max Price</Form.Label>
