@@ -21,27 +21,28 @@ const ProductDetailsPage = () => {
   );
   const categoriesRef = useRef(null);
   const {
-    data: data_2,
+    data: cateData,
     error: error_2,
     isLoading: isLoading_2,
   } = useSWR(["/categories", 1], ([url, arg]) => getAllCategories(arg));
 
-  if (error) return <h1>Error</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
-  if (error_2) return <h1>Error</h1>;
-  if (isLoading_2) return <h1>Loading...</h1>;
+  if (error || error_2) return <h1>Error</h1>;
+  if (isLoading || isLoading_2 || !data.categoriesInfo || !cateData.content)
+    return <h1>Loading...</h1>;
 
-  const options = data_2.content.map((category) => {
-    return {
+  const options = () =>
+    cateData.content.map((category) => {
+      return {
+        value: category.id,
+        label: category.name,
+      };
+    });
+
+  const selected = () =>
+    data.categoriesInfo.map((category) => ({
       value: category.id,
       label: category.name,
-    };
-  });
-
-  const selected = data.categoriesInfo.map((category) => ({
-    value: category.id,
-    label: category.name,
-  }));
+    }));
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -108,10 +109,10 @@ const ProductDetailsPage = () => {
           <Form.Check defaultChecked={data.isFeatured}></Form.Check>
         </Form.Group>
         <Select
-          options={options}
+          options={options()}
           isMulti={true}
           ref={categoriesRef}
-          defaultValue={selected}
+          defaultValue={selected()}
         ></Select>
         <SubmitButton>Update product</SubmitButton>
       </Form>
