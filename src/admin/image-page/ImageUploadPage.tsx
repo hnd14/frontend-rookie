@@ -7,8 +7,7 @@ const ImageUploadPage = () => {
   const { productId } = useParams();
   return (
     <Container>
-      <h1>Upload Image</h1>
-      <ImageUploadForm productId={productId} />
+      <ImageUploadForm productId={productId} next={"/admin"} />
     </Container>
   );
 };
