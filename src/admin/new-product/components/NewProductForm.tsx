@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import { NewProductItem } from "../../product/model/NewProductItem";
 import Select from "react-select";
 import {
@@ -8,6 +8,7 @@ import {
 } from "../../services/AdminService.ts";
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
+import SubmitButton from "../../../components/SubmitButton.jsx";
 
 const NewProductForm = () => {
   const [validated, setValidated] = useState(false);
@@ -28,7 +29,7 @@ const NewProductForm = () => {
       const data: NewProductItem = {
         name: formData.get("name")?.toString() || "",
         desc: formData.get("desc")?.toString() || "",
-        salePrice: Number(formData.get("price") * 1000),
+        salePrice: Number(formData.get("price")) * 1000,
         stock: Number(formData.get("stock")),
         isFeatured: Boolean(formData.get("featured")),
         categoriesId: categoriesRef.current.getValue().map((catOption) => {
@@ -86,10 +87,7 @@ const NewProductForm = () => {
           <Form.Label>Categories</Form.Label>
           <Select options={options} isMulti={true} ref={categoriesRef}></Select>
         </Form.Group>
-
-        <Button variant="dark" type="submit" className="mt-3">
-          Create product
-        </Button>
+        <SubmitButton>Create product</SubmitButton>
       </Form>
     </div>
   );

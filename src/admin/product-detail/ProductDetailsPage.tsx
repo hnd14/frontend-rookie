@@ -6,9 +6,10 @@ import {
   getProducts,
   updateProduct,
 } from "../services/AdminService.ts";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Form, InputGroup } from "react-bootstrap";
 import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
+import SubmitButton from "../../components/SubmitButton.jsx";
 
 const ProductDetailsPage = () => {
   const [validated, setValidated] = useState(false);
@@ -104,9 +105,7 @@ const ProductDetailsPage = () => {
           ref={categoriesRef}
           defaultValue={selected}
         ></Select>
-        <Button variant="dark" type="submit">
-          Update product
-        </Button>
+        <SubmitButton>Update product</SubmitButton>
       </Form>
     </div>
   );
