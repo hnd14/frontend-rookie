@@ -3,6 +3,7 @@ import { Button, Container } from "react-bootstrap";
 import { logout } from "../login/services/LoginService.ts";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider.jsx";
+import { mutate } from "swr";
 
 const LogOutButton = () => {
   const nav = useNavigate();
@@ -17,6 +18,7 @@ const LogOutButton = () => {
             .then()
             .catch()
             .finally(() => {
+              mutate("/me");
               setAuth({ isAuthenticated: false });
               nav("/");
             });

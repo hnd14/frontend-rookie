@@ -2,6 +2,7 @@ import React, { useContext, useRef } from "react";
 import { login } from "../services/LoginService.ts";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider.jsx";
+import { mutate } from "swr";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -33,10 +34,11 @@ const LoginForm = () => {
       login(data)
         .then((response) => {
           const authData = {};
-          authData.user = response.data.username;
+          authData.username = response.data.username;
           authData.isAuthenticated = response.data.isAuthenticated;
           authData.roles = response.data.roles;
-          setAuth(authData);
+          setAuth(response.data);
+          mutate("/me");
           if (from) {
             navigate(from, { replace: true });
           } else if (response.data.roles.includes("ROLE_ADMIN")) {
