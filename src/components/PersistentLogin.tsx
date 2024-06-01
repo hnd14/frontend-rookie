@@ -13,6 +13,7 @@ const PersistentLogin = () => {
         setIsLoading(false);
       })
       .catch(() => {
+        setAuth({ isAuthenticated: false });
         setIsLoading(false);
       });
   }, []);

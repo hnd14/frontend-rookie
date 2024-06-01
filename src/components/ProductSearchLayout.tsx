@@ -65,6 +65,11 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
   for (let number = 1; number <= data.pageCount; number++) {
     items.push(
       <Pagination.Item
+        linkStyle={{
+          background: "black",
+          color: "white",
+          borderColor: "black",
+        }}
         key={number}
         active={number === pageNumber}
         onClick={() => {

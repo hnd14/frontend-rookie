@@ -13,10 +13,13 @@ const LogOutButton = () => {
         className="ms-auto"
         variant="dark"
         onClick={() => {
-          logout().then(() => {
-            setAuth({ isAuthenticated: false });
-            nav("/");
-          });
+          logout()
+            .then()
+            .catch()
+            .finally(() => {
+              setAuth({ isAuthenticated: false });
+              nav("/");
+            });
         }}
       >
         Log out
