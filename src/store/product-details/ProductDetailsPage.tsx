@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
-import useSWR from "swr";
-import { Form, InputGroup, Image, Carousel, Row, Col } from "react-bootstrap";
+import useSWR, { mutate } from "swr";
+import {
+  Form,
+  InputGroup,
+  Image,
+  Carousel,
+  Row,
+  Col,
+  Container,
+} from "react-bootstrap";
 import { storeFetcher, updateRating } from "../services/CustomerServices.ts";
 import Select from "react-select";
 import { IMAGES_HOST } from "../../const/Util.ts";
 import RatingProduct from "../components/RatingProduct.tsx";
 import { AuthContext } from "../../context/AuthProvider.jsx";
+import ShowingRating from "./components/ShowingRating.tsx";
 
 const ProductDetailsCustomerPage = () => {
   const { productId } = useParams();
@@ -15,13 +24,18 @@ const ProductDetailsCustomerPage = () => {
     ([url, arg]) => storeFetcher(url + "/" + arg?.toString())
   );
   const { auth } = useContext(AuthContext);
-  const { data: ratingData } = useSWR(() => {
-    return auth.isAuthenticated ? `/products/${productId}/ratings/me` : null;
-  }, storeFetcher);
+  const { data: ratingData, isLoading: ratingLoading } = useSWR("/me", (url) =>
+    storeFetcher(`/products/${productId}/ratings` + url)
+  );
 
   if (error) return <h1>Error</h1>;
-  if (isLoading || !data.categories) return <h1>Loading...</h1>;
+  if (isLoading || !data.categories || ratingLoading)
+    return <h1>Loading...</h1>;
   if (auth.isAuthenticated && !ratingData) return <h1>Loading...</h1>;
+  if (auth.isAuthenticated && ratingData.username != auth.username)
+    return <h1>Loading...</h1>;
+  console.log(ratingData);
+  console.log(auth);
   const categories = () =>
     data.categories.map((category) => {
       return {
@@ -39,15 +53,17 @@ const ProductDetailsCustomerPage = () => {
     };
     updateRating(productId, ratingData)
       .then(() => {
+        mutate(`/products/${productId}/ratings`);
         alert("Rating updated");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         alert("Failed to update rating");
       });
   };
 
   return (
-    <div className="container">
+    <Container>
       <h1>{data.name}</h1>
       <Row>
         <Col xs={8}>
@@ -63,6 +79,7 @@ const ProductDetailsCustomerPage = () => {
               </Carousel.Item>
             ))}
           </Carousel>
+          <ShowingRating productId={productId} />
         </Col>
         <Col>
           <Form>
@@ -113,7 +130,7 @@ const ProductDetailsCustomerPage = () => {
           )}
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 
