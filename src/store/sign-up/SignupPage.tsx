@@ -37,7 +37,13 @@ const SignUpPage = () => {
         <Form onSubmit={handleSubmit} noValidate validated={validated}>
           <Form.Group controlId="username">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" required minLength={10} maxLength={100} />
+            <Form.Control
+              type="text"
+              required
+              minLength={10}
+              maxLength={100}
+              pattern="[^_]+"
+            />
           </Form.Group>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>

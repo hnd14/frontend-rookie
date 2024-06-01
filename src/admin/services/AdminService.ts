@@ -90,7 +90,7 @@ export const postThumbnail = (data) => {
 };
 
 export const updateImagesData = (data) => {
-  return axios.put(STORE_BACK_API + "/images/all/upload", data, {
+  return axios.post(STORE_BACK_API + "/images/upload", data, {
     headers: {},
     withCredentials: true,
   });
