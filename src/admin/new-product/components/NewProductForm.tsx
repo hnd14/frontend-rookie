@@ -60,15 +60,21 @@ const NewProductForm = () => {
       <h1>New product</h1>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productName">
-          <Form.Label>Product Name</Form.Label>
+          <Form.Label>
+            <b>Product Name</b>
+          </Form.Label>
           <Form.Control required type="text" name="name" />
         </Form.Group>
         <Form.Group controlId="productDesc">
-          <Form.Label>Product Descriptions</Form.Label>
+          <Form.Label>
+            <b>Product Descriptions</b>
+          </Form.Label>
           <Form.Control type="text" name="desc" />
         </Form.Group>
         <Form.Group controlId="productPrice">
-          <Form.Label name="price">Price</Form.Label>
+          <Form.Label name="price">
+            <b>Price</b>
+          </Form.Label>
           <InputGroup>
             <Form.Control required type="number" name="price" />
             <InputGroup.Text>000</InputGroup.Text>
@@ -76,15 +82,21 @@ const NewProductForm = () => {
           </InputGroup>
         </Form.Group>
         <Form.Group controlId="productStock">
-          <Form.Label>Stock</Form.Label>
+          <Form.Label>
+            <b>Stock</b>
+          </Form.Label>
           <Form.Control required defaultValue={0} type="number" name="stock" />
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
-          <Form.Check.Label>Featured</Form.Check.Label>
+          <Form.Check.Label>
+            <b>Featured</b>
+          </Form.Check.Label>
           <Form.Check name="featured"></Form.Check>
         </Form.Group>
         <Form.Group>
-          <Form.Label>Categories</Form.Label>
+          <Form.Label>
+            <b>Categories</b>
+          </Form.Label>
           <Select options={options} isMulti={true} ref={categoriesRef}></Select>
         </Form.Group>
         <SubmitButton>Create product</SubmitButton>

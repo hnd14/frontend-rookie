@@ -55,9 +55,9 @@ const ShowingRating = ({ productId }) => {
         }}
         defaultValue={searchParams.get("pageSize") || "10"}
       >
-        <option value={5}>5 items/page</option>
-        <option value={10}>10 items/page</option>
-        <option value={20}>20 items/page</option>
+        <option value={5}>5 comments/page</option>
+        <option value={10}>10 comments/page</option>
+        <option value={20}>20 comments/page</option>
       </Form.Select>
       {data.content.map((rating) => (
         <RatingCard data={rating} />

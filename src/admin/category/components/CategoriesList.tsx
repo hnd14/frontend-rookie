@@ -31,6 +31,11 @@ const CategoriesList = () => {
   for (let number = 1; number <= data.pageCount; number++) {
     items.push(
       <Pagination.Item
+        linkStyle={{
+          background: "black",
+          color: "white",
+          borderColor: "black",
+        }}
         key={number}
         active={number === pageNumber}
         onClick={() => setPageNumber(number)}
@@ -44,7 +49,6 @@ const CategoriesList = () => {
       <Table variant="dark" striped bordered hover>
         <thead>
           <tr>
-            <th>Id</th>
             <th>Category name</th>
             <th>Category descriptions</th>
             <th>Created by</th>
