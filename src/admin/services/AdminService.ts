@@ -73,25 +73,14 @@ export const adminFetcher = (url, params) => {
     .then((res) => res.data);
 };
 
-export const postImages = (data) => {
-  return axios.post(STORE_BACK_API + "/images/upload", data, {
-    headers: {
-      "content-type": "multipart/form-data",
-    },
-    withCredentials: true,
-  });
-};
-
-export const postThumbnail = (data) => {
-  return axios.post(STORE_BACK_API + "/images/thumnails/upload", data, {
-    headers: {},
-    withCredentials: true,
-  });
-};
-
 export const updateImagesData = (data) => {
   return axios.post(STORE_BACK_API + "/images/upload", data, {
-    headers: {},
+    withCredentials: true,
+  });
+};
+
+export const createNewAdmin = (data) => {
+  return axios.post(STORE_BACK_API + "/admins", data, {
     withCredentials: true,
   });
 };
