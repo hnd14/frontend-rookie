@@ -38,7 +38,7 @@ const LoginForm = () => {
           authData.isAuthenticated = response.data.isAuthenticated;
           authData.roles = response.data.roles;
           setAuth(response.data);
-          mutate("/me");
+          mutate((key) => typeof key === "string" && key.endsWith("/me"));
           if (from) {
             navigate(from, { replace: true });
           } else if (response.data.roles.includes("ROLE_ADMIN")) {

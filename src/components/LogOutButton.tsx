@@ -18,7 +18,7 @@ const LogOutButton = () => {
             .then()
             .catch()
             .finally(() => {
-              mutate("/me");
+              mutate((key) => typeof key === "string" && key.endsWith("/me"));
               setAuth({ isAuthenticated: false });
               nav("/");
             });

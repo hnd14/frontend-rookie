@@ -16,6 +16,7 @@ import { IMAGES_HOST } from "../../const/Util.ts";
 import RatingProduct from "../components/RatingProduct.tsx";
 import { AuthContext } from "../../context/AuthProvider.jsx";
 import ShowingRating from "./components/ShowingRating.tsx";
+import StaticStar from "./components/StaticStar.tsx";
 
 const ProductDetailsCustomerPage = () => {
   const { productId } = useParams();
@@ -24,18 +25,21 @@ const ProductDetailsCustomerPage = () => {
     ([url, arg]) => storeFetcher(url + "/" + arg?.toString())
   );
   const { auth } = useContext(AuthContext);
-  const { data: ratingData, isLoading: ratingLoading } = useSWR("/me", (url) =>
-    storeFetcher(`/products/${productId}/ratings` + url)
+  const { data: ratingData, isLoading: ratingLoading } = useSWR(
+    `/products/${productId}/ratings/me`,
+    (url) => storeFetcher(url)
   );
 
   if (error) return <h1>Error</h1>;
   if (isLoading || !data.categories || ratingLoading)
     return <h1>Loading...</h1>;
   if (auth.isAuthenticated && !ratingData) return <h1>Loading...</h1>;
-  if (auth.isAuthenticated && ratingData.username != auth.username)
+  if (
+    auth.isAuthenticated &&
+    ratingData.username != auth.username &&
+    ratingData.productId.toString() != productId
+  )
     return <h1>Loading...</h1>;
-  console.log(ratingData);
-  console.log(auth);
   const categories = () =>
     data.categories.map((category) => {
       return {
@@ -53,11 +57,16 @@ const ProductDetailsCustomerPage = () => {
     };
     updateRating(productId, ratingData)
       .then(() => {
-        mutate(`/products/${productId}/ratings`);
+        mutate(
+          mutate(
+            (key) =>
+              typeof key === "string" &&
+              key.startsWith(`/products/${productId}/ratings`)
+          )
+        );
         alert("Rating updated");
       })
       .catch((error) => {
-        console.log(error);
         alert("Failed to update rating");
       });
   };
@@ -79,7 +88,6 @@ const ProductDetailsCustomerPage = () => {
               </Carousel.Item>
             ))}
           </Carousel>
-          <ShowingRating productId={productId} />
         </Col>
         <Col>
           <Form>
