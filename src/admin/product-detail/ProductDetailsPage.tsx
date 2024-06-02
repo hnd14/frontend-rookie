@@ -6,10 +6,11 @@ import {
   getProducts,
   updateProduct,
 } from "../services/AdminService.ts";
-import { Button, Form, InputGroup } from "react-bootstrap";
+import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
 import SubmitButton from "../../components/SubmitButton.jsx";
+import formatTime from "../../util/Util.ts";
 
 const ProductDetailsPage = () => {
   const [validated, setValidated] = useState(false);
@@ -75,7 +76,9 @@ const ProductDetailsPage = () => {
   };
   return (
     <div className="container">
-      <h1>{data.name}</h1>
+      <h1>
+        <b>{data.name}</b>
+      </h1>
       <Button
         variant="dark"
         onClick={() => {
@@ -86,11 +89,15 @@ const ProductDetailsPage = () => {
       </Button>
       <Form onSubmit={handleSubmit} noValidate validated={validated}>
         <Form.Group controlId="productDesc">
-          <Form.Label>Product Descriptions</Form.Label>
+          <Form.Label>
+            <b>Product Descriptions</b>
+          </Form.Label>
           <Form.Control type="text" defaultValue={data.desc} />
         </Form.Group>
         <Form.Group controlId="productPrice">
-          <Form.Label>Price</Form.Label>
+          <Form.Label>
+            <b>Price</b>
+          </Form.Label>
           <InputGroup>
             <Form.Control
               required
@@ -101,19 +108,72 @@ const ProductDetailsPage = () => {
           </InputGroup>
         </Form.Group>
         <Form.Group controlId="productStock">
-          <Form.Label>Stock</Form.Label>
+          <Form.Label>
+            <b>Stock</b>
+          </Form.Label>
           <Form.Control required defaultValue={data.stock} type="number" />
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
-          <Form.Check.Label>Featured</Form.Check.Label>
-          <Form.Check defaultChecked={data.isFeatured}></Form.Check>
+          <Form.Check.Label>
+            {" "}
+            <b>Featured</b>
+          </Form.Check.Label>
+          <Form.Check
+            className="m-2"
+            inline
+            defaultChecked={data.isFeatured}
+          ></Form.Check>
         </Form.Group>
+        <Form.Label>
+          <b>Categories</b>
+        </Form.Label>
         <Select
           options={options()}
           isMulti={true}
           ref={categoriesRef}
           defaultValue={selected()}
         ></Select>
+        <Form.Group>
+          <Form.Label></Form.Label>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>
+            <b>Last updated</b>
+          </Form.Label>
+          <Row>
+            <Col>
+              <Form.Label>
+                <b>At:</b>
+                {" " + formatTime(data.updatedTime)}
+              </Form.Label>
+            </Col>
+            <Col>
+              <Form.Label>
+                <b>By:</b>
+                {" " + data.updatedBy}
+              </Form.Label>
+            </Col>
+          </Row>
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>
+            <b>Created by</b>
+          </Form.Label>
+          <Row>
+            <Col>
+              <Form.Label>
+                <b>At:</b>
+                {" " + formatTime(data.createdTime)}
+              </Form.Label>
+            </Col>
+            <Col>
+              <Form.Label>
+                <b>By:</b>
+                {" " + data.createdBy}
+              </Form.Label>
+            </Col>
+          </Row>
+        </Form.Group>
         <SubmitButton>Update product</SubmitButton>
       </Form>
     </div>
