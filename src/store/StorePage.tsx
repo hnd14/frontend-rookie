@@ -24,6 +24,11 @@ const StorePage = () => {
               Store
             </Nav.Link>
           </Nav.Item>
+          <NavItem>
+            <Nav.Link disabled onClick={() => nav("/")} active={false}>
+              Contact
+            </Nav.Link>
+          </NavItem>
           {auth.roles?.includes("ROLE_ADMIN") ? (
             <Nav.Item>
               <Nav.Link onClick={() => nav("/admin")} active={true}>
@@ -33,11 +38,6 @@ const StorePage = () => {
           ) : (
             <></>
           )}
-          <NavItem>
-            <Nav.Link onClick={() => nav("/")} active={true}>
-              Contact
-            </Nav.Link>
-          </NavItem>
         </Nav>
         {auth.isAuthenticated ? (
           <LogOutButton />
