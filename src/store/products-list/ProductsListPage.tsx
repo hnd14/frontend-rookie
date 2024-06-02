@@ -11,6 +11,10 @@ const ProductPageTest = () => {
         displayer={({ data }) => {
           return data.content.map((product) => <ProductCard data={product} />);
         }}
+        sortCriteria={[
+          { label: "Product name", value: "name" },
+          { label: "Price", value: "salePrice" },
+        ]}
       />
     </>
   );

@@ -15,6 +15,13 @@ const ProductPageV2 = () => {
         displayer={({ data, mutate }) => (
           <ProductTable data={data} mutate={mutate} />
         )}
+        sortCriteria={[
+          { label: "Product name", value: "name" },
+          { label: "Date created", value: "createdTime" },
+          { label: "Last modified", value: "updatedTime" },
+          { label: "Price", value: "salePrice" },
+          { label: "Stock", value: "stock" },
+        ]}
       />
     </>
   );
