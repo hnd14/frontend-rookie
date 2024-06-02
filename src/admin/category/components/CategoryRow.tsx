@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CategoryItem } from "../model/CategoryItem";
 import CategoryEditForm from "./CategoryEditForm.tsx";
+import formatTime from "../../../util/Util.ts";
 
 interface Props {
   category: CategoryItem;
@@ -12,13 +13,12 @@ const CategoryRow = ({ category, handleDelete }: Props) => {
   return (
     <>
       <tr>
-        <td>{category.id}</td>
         <td>{category.name}</td>
         <td>{category.desc}</td>
         <td>{category.createdBy}</td>
-        <td>{category.createdTime}</td>
+        <td>{formatTime(category.createdTime)}</td>
         <td>{category.updatedBy}</td>
-        <td>{category.updatedTime}</td>
+        <td>{formatTime(category.updatedTime)}</td>
         <td>
           <button
             onClick={() => {
