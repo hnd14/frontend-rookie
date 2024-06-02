@@ -17,6 +17,7 @@ import RouteProtector from "./components/RouteProtector.tsx";
 import PersistentLogin from "./components/PersistentLogin.tsx";
 import ProductPageV2 from "./admin/product/ProductPageV2.tsx";
 import ImageUploadPage from "./admin/image-page/ImageUploadPage.tsx";
+import UsersPage from "./admin/users/UsersPage.tsx";
 
 function App() {
   return (
@@ -38,24 +39,20 @@ function App() {
               <RouteProtector allowedRoles={["ROLE_ADMIN"]}></RouteProtector>
             }
           >
-            <Route>
-              <Route path="/admin" Component={Admin}>
-                <Route index path="/admin" Component={ProductPageV2} />
-                <Route path="/admin/categories" Component={CategoryPage} />
-                <Route
-                  path="/admin/new-categories"
-                  Component={NewCategoryPage}
-                />
-                <Route
-                  path="/admin/products/:productId"
-                  Component={ProductDetailsPage}
-                />
-                <Route
-                  path="/admin/products/images/:productId"
-                  Component={ImageUploadPage}
-                />
-                <Route path="/admin/new-product" Component={NewProductPage} />
-              </Route>
+            <Route path="/admin" Component={Admin}>
+              <Route index path="/admin" Component={ProductPageV2} />
+              <Route path="/admin/categories" Component={CategoryPage} />
+              <Route path="/admin/new-categories" Component={NewCategoryPage} />
+              <Route
+                path="/admin/products/:productId"
+                Component={ProductDetailsPage}
+              />
+              <Route
+                path="/admin/products/images/:productId"
+                Component={ImageUploadPage}
+              />
+              <Route path="/admin/new-product" Component={NewProductPage} />
+              <Route path="/admin/users" Component={UsersPage} />
             </Route>
           </Route>
         </Route>
