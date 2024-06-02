@@ -18,6 +18,7 @@ import PersistentLogin from "./components/PersistentLogin.tsx";
 import ProductPageV2 from "./admin/product/ProductPageV2.tsx";
 import ImageUploadPage from "./admin/image-page/ImageUploadPage.tsx";
 import UsersPage from "./admin/users/UsersPage.tsx";
+import NewAdminPage from "./admin/new-admin-page/NewAdminPage.tsx";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
               />
               <Route path="/admin/new-product" Component={NewProductPage} />
               <Route path="/admin/users" Component={UsersPage} />
+              <Route path="/admin/new" Component={NewAdminPage} />
             </Route>
           </Route>
         </Route>
