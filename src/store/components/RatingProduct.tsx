@@ -12,13 +12,14 @@ const RatingProduct = ({
   return (
     <Container>
       <h3>
-        <b>Rating</b>
+        <b>Rates this product</b>
       </h3>
 
       <Container onMouseLeave={() => setFilledStar(rating)}>
         {[...Array(filledStar)].map((i, index) => (
           <i
             className="bi bi-star-fill h3"
+            style={{ color: "gold" }}
             onMouseEnter={() => setFilledStar(index + 1)}
             onClick={() => setRating(index + 1)}
           />
@@ -26,6 +27,7 @@ const RatingProduct = ({
         {[...Array(5 - filledStar)].map((i, index) => (
           <i
             className="bi bi-star h3"
+            style={{ color: "gold" }}
             onMouseEnter={() => setFilledStar(5 - index)}
             onClick={() => setRating(5 - index)}
           />

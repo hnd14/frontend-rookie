@@ -7,15 +7,15 @@ const StaticStar = ({ score, size = "h3" }) => {
   return (
     <>
       {[...Array(filledStar)].map(() => (
-        <i className={`bi bi-star-fill ${size}`} />
+        <i className={`bi bi-star-fill ${size}`} style={{ color: "gold" }} />
       ))}
 
       {[...Array(halfStar)].map(() => (
-        <i className={`bi bi-star-half ${size}`} />
+        <i className={`bi bi-star-half ${size}`} style={{ color: "gold" }} />
       ))}
 
       {[...Array(5 - filledStar - halfStar)].map(() => (
-        <i className={`bi bi-star ${size}`} />
+        <i className={`bi bi-star ${size}`} style={{ color: "gold" }} />
       ))}
     </>
   );

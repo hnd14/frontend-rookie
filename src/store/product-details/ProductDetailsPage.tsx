@@ -73,7 +73,9 @@ const ProductDetailsCustomerPage = () => {
 
   return (
     <Container>
-      <h1>{data.name}</h1>
+      <h1>
+        <b>{data.name}</b>
+      </h1>
       <Row>
         <Col xs={8}>
           <Carousel>
