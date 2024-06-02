@@ -114,7 +114,14 @@ const ProductDetailsCustomerPage = () => {
               />
             </Form.Group>
           </Form>
-
+          <StaticStar score={data.averageScore || 0} size="h1" />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={8}>
+          <ShowingRating productId={productId} />
+        </Col>
+        <Col>
           {auth.isAuthenticated ? (
             ratingData ? (
               <RatingProduct
