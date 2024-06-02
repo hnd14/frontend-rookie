@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CategoryItem } from "../model/CategoryItem";
 import CategoryEditForm from "./CategoryEditForm.tsx";
-import formatTime from "../../../util/Util.ts";
+import { formatTime } from "../../../util/Util.ts";
 
 interface Props {
   category: CategoryItem;

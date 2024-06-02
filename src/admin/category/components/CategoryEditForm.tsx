@@ -31,12 +31,15 @@ const CategoryEditForm = ({ category, show, handleClose }: Props) => {
         handleClose();
       }}
     >
-      <Modal.Header closeButton>Edit category</Modal.Header>
+      <Modal.Header closeButton>
+        {" "}
+        <b>Edit category</b>
+      </Modal.Header>
       <ModalBody>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="categoryName" className="form-label">
-              Category Name
+              <b>Category Name</b>
             </label>
             <input
               className="form-control-plaintext"
@@ -45,7 +48,7 @@ const CategoryEditForm = ({ category, show, handleClose }: Props) => {
               value={category.name}
             />
             <label htmlFor="categoryDesc" className="form-label">
-              Category descriptions
+              <b>Category descriptions</b>
             </label>
             <input
               className="form-control"
@@ -54,7 +57,7 @@ const CategoryEditForm = ({ category, show, handleClose }: Props) => {
               ref={descRef}
             />
           </div>
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-dark" type="submit">
             Update category
           </button>
         </form>
