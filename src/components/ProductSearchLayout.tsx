@@ -13,10 +13,15 @@ import {
 
 interface Props {
   fetcher: any;
+  sortCriteria: { label; value }[];
   displayer: ({ data, mutate }) => React.JSX.Element;
 }
 
-const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
+const ProductSearchLayout = ({
+  fetcher,
+  sortCriteria = [],
+  displayer,
+}: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const nameRef = useRef(document.createElement("input"));
   const minPriceRef = useRef(document.createElement("input"));
@@ -29,6 +34,8 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
     maxPrice: searchParams.get("maxPrice"),
     pageSize: searchParams.get("pageSize"),
     pageNumber: searchParams.get("pageNumber"),
+    sortBy: searchParams.get("sortBy"),
+    direction: searchParams.get("sortDirection"),
   };
   const { data, error, isLoading, mutate } = useSWR(
     ["/products", params],
@@ -38,8 +45,11 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
     data: cateData,
     error: cateError,
     isLoading: cateLoading,
-  } = useSWR(["/categories", params], ([url, params]) => fetcher(url, params));
+  } = useSWR(["/categories", { pageSize: 1000 }], ([url, params]) =>
+    fetcher(url, params)
+  );
   const [pageNumber, setPageNumber] = useState(1);
+  const RANDOM_KEY = Math.random().toString().slice(2, 20);
   if (error || cateError) return <h1>Error</h1>;
   if (isLoading || cateLoading) return <h1>Loading...</h1>;
 
@@ -51,21 +61,27 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
     ) {
       alert("Min price must be smaller than max price");
     } else {
-      const newSearchParams = {
-        name: nameRef.current.value,
-        minPrice:
+      setSearchParams((p) => {
+        p.set(
+          "minPrice",
           Number(minPriceRef.current.value) > 0
             ? minPriceRef.current.value.toString() + "000"
-            : "",
-        maxPrice:
+            : ""
+        );
+        p.set(
+          "maxPrice",
           Number(maxPriceRef.current.value) > 0
             ? maxPriceRef.current.value.toString() + "000"
-            : "",
-      };
-      if (categoryRef.current.value != "0") {
-        newSearchParams.category = categoryRef.current.value;
-      }
-      setSearchParams(newSearchParams);
+            : ""
+        );
+        p.set("name", nameRef.current.value);
+        if (categoryRef.current.value != "0") {
+          p.set("category", categoryRef.current.value);
+        } else {
+          p.delete("category");
+        }
+        return p;
+      });
     }
   };
 
@@ -144,18 +160,64 @@ const ProductSearchLayout = ({ fetcher, displayer }: Props) => {
       <Col xs={9}>
         <Row className="d-flex justify-content-end">
           <Col xs={3}>
+            <Form.Label>
+              <b>Page size</b>
+            </Form.Label>
+            <InputGroup>
+              <Form.Select
+                onChange={(e) => {
+                  setSearchParams((p) => {
+                    p.set("pageSize", e.target.value);
+                    return p;
+                  });
+                }}
+                defaultValue={searchParams.get("pageSize") || "10"}
+              >
+                <option value={5}>5</option>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+              </Form.Select>
+              <InputGroup.Text>items/page</InputGroup.Text>
+            </InputGroup>
+          </Col>
+          <Col xs={3}>
+            <Form.Label>
+              <b>Sort by</b>
+            </Form.Label>
             <Form.Select
+              defaultValue={searchParams.get("sortBy") || RANDOM_KEY}
               onChange={(e) => {
                 setSearchParams((p) => {
-                  p.set("pageSize", e.target.value);
+                  if (e.target.value != RANDOM_KEY) {
+                    p.set("sortBy", e.target.value);
+                  } else {
+                    p.delete("sortBy");
+                  }
                   return p;
                 });
               }}
-              defaultValue={searchParams.get("pageSize") || "10"}
             >
-              <option value={5}>5 items/page</option>
-              <option value={10}>10 items/page</option>
-              <option value={20}>20 items/page</option>
+              <option value={RANDOM_KEY}></option>
+              {sortCriteria.map((criteria) => {
+                return <option value={criteria.value}>{criteria.label}</option>;
+              })}
+            </Form.Select>
+          </Col>
+          <Col xs={3}>
+            <Form.Label>
+              <b>Sort directions</b>
+            </Form.Label>
+            <Form.Select
+              onChange={(e) => {
+                setSearchParams((p) => {
+                  p.set("sortDirection", e.target.value);
+                  return p;
+                });
+              }}
+              defaultValue={searchParams.get("sortDirection") || "ASC"}
+            >
+              <option value={"ASC"}>Ascending</option>
+              <option value={"DESC"}>Descending</option>
             </Form.Select>
           </Col>
         </Row>
