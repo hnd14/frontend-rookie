@@ -17,6 +17,7 @@ import RatingProduct from "../components/RatingProduct.tsx";
 import { AuthContext } from "../../context/AuthProvider.jsx";
 import ShowingRating from "./components/ShowingRating.tsx";
 import StaticStar from "./components/StaticStar.tsx";
+import { formatPrice } from "../../util/Util.ts";
 
 const ProductDetailsCustomerPage = () => {
   const { productId } = useParams();
@@ -107,7 +108,7 @@ const ProductDetailsCustomerPage = () => {
                 <Form.Control
                   required
                   type="text"
-                  defaultValue={`${data.salePrice} VND`}
+                  defaultValue={`${formatPrice(data.salePrice)} VND`}
                   plaintext
                 />
               </InputGroup>

@@ -3,6 +3,7 @@ import { Button, Card, CardText, CardTitle } from "react-bootstrap";
 import { ProductThumbnail } from "../model/Product";
 import { useNavigate } from "react-router-dom";
 import { IMAGES_HOST } from "../../const/Util.ts";
+import { formatPrice } from "../../util/Util.ts";
 interface Props {
   data: ProductThumbnail;
 }
@@ -25,7 +26,7 @@ const ProductCard = ({ data }: Props) => {
       ></Card.Img>
       <CardTitle>{data.name}</CardTitle>
       <CardText>
-        <b>{data.salePrice.toString()}</b> VND
+        <b>{formatPrice(data.salePrice)}</b> VND
       </CardText>
       <Button onClick={handleClick} variant="dark" className="m-1">
         View details

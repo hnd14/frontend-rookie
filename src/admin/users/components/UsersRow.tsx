@@ -1,5 +1,5 @@
 import React from "react";
-import formatTime from "../../../util/Util.ts";
+import { formatTime } from "../../../util/Util.ts";
 
 const UsersRow = ({ data }) => {
   return (

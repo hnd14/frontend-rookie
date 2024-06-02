@@ -4,7 +4,7 @@ import UsersRow from "./UsersRow.tsx";
 
 const UsersTable = ({ data, mutate }) => {
   return (
-    <Table>
+    <Table variant="dark" striped bordered hover>
       <thead>
         <tr>
           <th>Username</th>

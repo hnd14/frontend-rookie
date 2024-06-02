@@ -10,7 +10,7 @@ import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
 import SubmitButton from "../../components/SubmitButton.jsx";
-import formatTime from "../../util/Util.ts";
+import { formatTime } from "../../util/Util.ts";
 
 const ProductDetailsPage = () => {
   const [validated, setValidated] = useState(false);
@@ -51,12 +51,13 @@ const ProductDetailsPage = () => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
+      const formData = new FormData(form);
       const data: NewProductItem = {
-        name: document.getElementById("productName")?.value,
-        desc: document.getElementById("productDesc")?.value,
-        salePrice: document.getElementById("productPrice")?.value,
-        stock: document.getElementById("productStock")?.value,
-        isFeatured: document.getElementById("productIsFeatured")?.checked,
+        name: formData.get("name")?.toString() || "",
+        desc: formData.get("desc")?.toString() || "",
+        salePrice: Number(formData.get("price")) * 1000,
+        stock: Number(formData.get("stock")),
+        isFeatured: Boolean(formData.get("featured")),
         categoriesId: categoriesRef.current.getValue().map((catOption) => {
           return catOption.value;
         }),
@@ -92,18 +93,21 @@ const ProductDetailsPage = () => {
           <Form.Label>
             <b>Product Descriptions</b>
           </Form.Label>
-          <Form.Control type="text" defaultValue={data.desc} />
+          <Form.Control type="text" name="desc" defaultValue={data.desc} />
         </Form.Group>
         <Form.Group controlId="productPrice">
-          <Form.Label>
+          <Form.Label name="price">
             <b>Price</b>
           </Form.Label>
           <InputGroup>
             <Form.Control
               required
               type="number"
-              defaultValue={data.salePrice}
+              name="price"
+              defaultValue={data.salePrice / 1000}
+              step={0.5}
             />
+            <InputGroup.Text>000</InputGroup.Text>
             <InputGroup.Text>VND</InputGroup.Text>
           </InputGroup>
         </Form.Group>
@@ -111,16 +115,19 @@ const ProductDetailsPage = () => {
           <Form.Label>
             <b>Stock</b>
           </Form.Label>
-          <Form.Control required defaultValue={data.stock} type="number" />
+          <Form.Control
+            required
+            defaultValue={data.stock}
+            type="number"
+            name="stock"
+          />
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
           <Form.Check.Label>
-            {" "}
             <b>Featured</b>
           </Form.Check.Label>
           <Form.Check
-            className="m-2"
-            inline
+            name="featured"
             defaultChecked={data.isFeatured}
           ></Form.Check>
         </Form.Group>

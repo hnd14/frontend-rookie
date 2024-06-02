@@ -76,7 +76,7 @@ const NewProductForm = () => {
             <b>Price</b>
           </Form.Label>
           <InputGroup>
-            <Form.Control required type="number" name="price" />
+            <Form.Control required type="number" name="price" step={0.5} />
             <InputGroup.Text>000</InputGroup.Text>
             <InputGroup.Text>VND</InputGroup.Text>
           </InputGroup>
