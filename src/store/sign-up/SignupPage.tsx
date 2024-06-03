@@ -13,6 +13,9 @@ const SignUpPage = () => {
     const password = document.getElementById("password")?.value;
     const passwordRe = document.getElementById("password-repeat")?.value;
     if (form.checkValidity() === false || password != passwordRe) {
+      if (password != passwordRe) {
+        alert("Passwords not match!");
+      }
       event.stopPropagation();
     } else {
       const data: SignUpData = {
