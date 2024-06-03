@@ -106,9 +106,13 @@ const ProductDetailsPage = () => {
               name="price"
               defaultValue={data.salePrice / 1000}
               step={0.5}
+              min={0}
             />
             <InputGroup.Text>000</InputGroup.Text>
             <InputGroup.Text>VND</InputGroup.Text>
+            <Form.Control.Feedback type="invalid">
+              Price must be a non-negative number that is a multiple of 500VND
+            </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
         <Form.Group controlId="productStock">
@@ -120,7 +124,11 @@ const ProductDetailsPage = () => {
             defaultValue={data.stock}
             type="number"
             name="stock"
+            min={0}
           />
+          <Form.Control.Feedback type="invalid">
+            Stock must be a non-negative integer
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
           <Form.Check.Label>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { createNewAdmin } from "../services/AdminService.ts";
-
+import SubmitButton from "../../components/SubmitButton.jsx";
 const NewAdminPage = () => {
   const [validated, setValidated] = useState(false);
   const nav = useNavigate();
@@ -49,6 +49,10 @@ const NewAdminPage = () => {
               maxLength={100}
               pattern="[^_]+"
             />
+            <Form.Control.Feedback type="invalid">
+              Username must stay between 10-100 characters without using the "_"
+              character!
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
@@ -59,6 +63,9 @@ const NewAdminPage = () => {
               minLength={6}
               maxLength={100}
             />
+            <Form.Control.Feedback type="invalid">
+              Password must stay between 6 and 100 characters.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password-repeat">
             <Form.Label>Repeat password</Form.Label>
@@ -69,10 +76,11 @@ const NewAdminPage = () => {
               minLength={6}
               maxLength={100}
             />
+            <Form.Control.Feedback type="invalid">
+              Password must stay between 6 and 100 characters.
+            </Form.Control.Feedback>
           </Form.Group>
-          <Button className="mt-1" variant="dark" type="submit">
-            Sign up
-          </Button>
+          <SubmitButton>Create New Admin</SubmitButton>
         </Form>
       </Container>
     </>

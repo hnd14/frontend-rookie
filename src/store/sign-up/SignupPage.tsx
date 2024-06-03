@@ -45,10 +45,17 @@ const SignUpPage = () => {
               maxLength={100}
               pattern="[^_]+"
             />
+            <Form.Control.Feedback type="invalid">
+              Username must stay between 10-100 characters without using the "_"
+              character!
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control type="email" required />
+            <Form.Control.Feedback type="invalid">
+              Email is not valid!
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
@@ -58,6 +65,9 @@ const SignUpPage = () => {
               minLength={6}
               maxLength={100}
             />
+            <Form.Control.Feedback type="invalid">
+              Password must stay between 6 and 100 characters.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password-repeat">
             <Form.Label>Repeat password</Form.Label>
@@ -67,7 +77,11 @@ const SignUpPage = () => {
               minLength={6}
               maxLength={100}
             />
+            <Form.Control.Feedback type="invalid">
+              Password must stay between 6 and 100 characters.
+            </Form.Control.Feedback>
           </Form.Group>
+
           <Button className="mt-1" variant="dark" type="submit">
             Sign up
           </Button>

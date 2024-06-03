@@ -64,6 +64,9 @@ const NewProductForm = () => {
             <b>Product Name</b>
           </Form.Label>
           <Form.Control required type="text" name="name" />
+          <Form.Control.Feedback type="invalid">
+            Product name must not be empty!
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="productDesc">
           <Form.Label>
@@ -76,16 +79,34 @@ const NewProductForm = () => {
             <b>Price</b>
           </Form.Label>
           <InputGroup>
-            <Form.Control required type="number" name="price" step={0.5} />
+            <Form.Control
+              required
+              type="number"
+              name="price"
+              step={0.5}
+              min={0}
+            />
             <InputGroup.Text>000</InputGroup.Text>
             <InputGroup.Text>VND</InputGroup.Text>
+            <Form.Control.Feedback type="invalid">
+              Price must be a non-negative number that is a multiple of 500VND
+            </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
         <Form.Group controlId="productStock">
           <Form.Label>
             <b>Stock</b>
           </Form.Label>
-          <Form.Control required defaultValue={0} type="number" name="stock" />
+          <Form.Control
+            required
+            defaultValue={0}
+            type="number"
+            name="stock"
+            min={0}
+          />
+          <Form.Control.Feedback type="invalid">
+            Stock must be a non-negative integer
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group controlId="productIsFeatured">
           <Form.Check.Label>
