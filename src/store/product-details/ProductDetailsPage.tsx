@@ -28,7 +28,8 @@ const ProductDetailsCustomerPage = () => {
   const { auth } = useContext(AuthContext);
   const { data: ratingData, isLoading: ratingLoading } = useSWR(
     `/products/${productId}/ratings/me`,
-    (url) => storeFetcher(url)
+    (url) => storeFetcher(url),
+    { shouldRetryOnError: auth.isAuthenticated }
   );
 
   if (error) return <h1>Error</h1>;

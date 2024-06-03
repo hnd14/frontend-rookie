@@ -16,7 +16,7 @@ const SearchBar = () => {
   const nav = useNavigate();
   const nameRef = useRef(document.createElement("input"));
   const params = {
-    pageSize: 100,
+    pageSize: 1000,
   };
   const { data, error, isLoading } = useSWR(
     ["/categories", params],
