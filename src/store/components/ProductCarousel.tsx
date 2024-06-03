@@ -71,7 +71,7 @@ const ProductCarousel = ({ data, title = "" }: Props) => {
             <Button
               variant="dark"
               className="me-1 justify-content-center"
-              disabled={index == 0 ? true : false}
+              disabled={index <= 0 ? true : false}
               onClick={() => {
                 setIndex((i) => i - 1);
               }}
@@ -81,7 +81,7 @@ const ProductCarousel = ({ data, title = "" }: Props) => {
             <Button
               variant="dark"
               className="justify-content-center"
-              disabled={index == sliceNumber - 1 ? true : false}
+              disabled={index >= sliceNumber - 1 ? true : false}
               onClick={() => {
                 setIndex((i) => i + 1);
               }}
