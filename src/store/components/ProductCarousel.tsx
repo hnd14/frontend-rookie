@@ -3,7 +3,7 @@ import { useState } from "react";
 import Carousel from "react-bootstrap/Carousel";
 import { ProductThumbnail } from "../model/Product";
 import ProductCard from "./ProductCard.tsx";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 interface Props {
   data: ProductThumbnail[];
   title: String;
@@ -66,7 +66,30 @@ const ProductCarousel = ({ data, title = "" }: Props) => {
     <>
       <Container>
         <h2>{title}</h2>
-
+        <Row className="d-flex justify-content-start">
+          <Col xs={2}>
+            <Button
+              variant="dark"
+              className="me-1 justify-content-center"
+              disabled={index == 0 ? true : false}
+              onClick={() => {
+                setIndex((i) => i - 1);
+              }}
+            >
+              <i className="bi bi-arrow-left"></i>
+            </Button>
+            <Button
+              variant="dark"
+              className="justify-content-center"
+              disabled={index == sliceNumber - 1 ? true : false}
+              onClick={() => {
+                setIndex((i) => i + 1);
+              }}
+            >
+              <i className="bi bi-arrow-right "></i>
+            </Button>
+          </Col>
+        </Row>
         <Container className="d-flex justify-content-center">
           <Carousel
             activeIndex={index}
@@ -74,6 +97,7 @@ const ProductCarousel = ({ data, title = "" }: Props) => {
             variant="dark"
             indicators={false}
             as={Row}
+            controls={false}
           >
             {items}
           </Carousel>
