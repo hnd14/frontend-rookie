@@ -26,11 +26,11 @@ const ProductCard = ({ data }: Props) => {
         alt={`Image for ${data.name}`}
         style={{ height: "15rem" }}
       ></Card.Img>
-      <CardTitle>{data.name}</CardTitle>
-      <CardText>
-        <b>{formatPrice(data.salePrice)}</b> VND
-      </CardText>
       <Card.Body>
+        <CardTitle>{data.name}</CardTitle>
+        <CardText>
+          <b>{formatPrice(data.salePrice)}</b> VND
+        </CardText>
         <StaticStar score={data.avgRating}></StaticStar>
       </Card.Body>
       <Button onClick={handleClick} variant="dark" className="m-1">
