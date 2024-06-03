@@ -4,6 +4,8 @@ import { ProductThumbnail } from "../model/Product";
 import { useNavigate } from "react-router-dom";
 import { IMAGES_HOST } from "../../const/Util.ts";
 import { formatPrice } from "../../util/Util.ts";
+import StaticStar from "./StaticStar.tsx";
+
 interface Props {
   data: ProductThumbnail;
 }
@@ -28,6 +30,9 @@ const ProductCard = ({ data }: Props) => {
       <CardText>
         <b>{formatPrice(data.salePrice)}</b> VND
       </CardText>
+      <Card.Body>
+        <StaticStar score={data.avgRating}></StaticStar>
+      </Card.Body>
       <Button onClick={handleClick} variant="dark" className="m-1">
         View details
       </Button>

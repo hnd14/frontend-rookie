@@ -14,6 +14,7 @@ const ProductPageTest = () => {
         sortCriteria={[
           { label: "Product name", value: "name" },
           { label: "Price", value: "salePrice" },
+          { label: "Rating", value: "avgRating" },
         ]}
       />
     </>

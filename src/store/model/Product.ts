@@ -3,6 +3,7 @@ export type ProductThumbnail = {
   name: string;
   salePrice: number;
   thumbnailUrl: string;
+  avgRating: number;
 };
 export type ProductDetails = {
   id: number;
