@@ -11,7 +11,7 @@ export const getAllCategories = (pageNumber: number) => {
     .then((res) => res.data);
 };
 
-export async function createNewCategory(data: { name: string; desc: string }) {
+export async function createNewCategory(data: { name; desc }) {
   return axios.post(STORE_BACK_API + "/categories", data, {
     withCredentials: true,
   });

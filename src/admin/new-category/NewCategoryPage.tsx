@@ -1,10 +1,10 @@
 import React from "react";
-import NewCategoryForm from "./components/NewCategoryForm.jsx";
+import NewCategoryFormV2 from "./components/NewCategoryFormV2.tsx";
 
 const NewCategoryPage = () => {
   return (
     <div>
-      <NewCategoryForm />
+      <NewCategoryFormV2 />
     </div>
   );
 };
