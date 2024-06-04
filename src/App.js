@@ -19,52 +19,66 @@ import ProductPageV2 from "./admin/product/ProductPageV2.tsx";
 import ImageUploadPage from "./admin/image-page/ImageUploadPage.tsx";
 import UsersPage from "./admin/users/UsersPage.tsx";
 import NewAdminPage from "./admin/new-admin-page/NewAdminPage.tsx";
+import { Suspense } from "react";
+import LoadingPage from "./components/LoadingPage.tsx";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route Component={PersistentLogin}>
-          <Route path="/" exact Component={StorePage}>
-            <Route path="/" Component={Home}></Route>
-            <Route path="/login" Component={LoginPage} />
-            <Route path="/signup" Component={SignUpPage} />
-            <Route path="/products" Component={ProductsListPage} />
-            <Route
-              path="/products/:productId"
-              Component={ProductDetailsCustomerPage}
-            />
-          </Route>
-          <Route
+    <Suspense>
+      <BrowserRouter fallback={<LoadingPage />}>
+        <Routes>
+          <Route Component={PersistentLogin}>
+            <Route path="/" exact Component={StorePage}>
+              <Route path="/" Component={Home}></Route>
+              <Route path="/login" Component={LoginPage} />
+              <Route path="/signup" Component={SignUpPage} />
+              <Route path="/products" Component={ProductsListPage} />
+              <Route
+                path="/products/:productId"
+                Component={ProductDetailsCustomerPage}
+              />
+            </Route>
+            {/* <Route
             element={
-              <RouteProtector allowedRoles={["ROLE_ADMIN"]}></RouteProtector>
+              <RouteProtector allowedRoles={["ROLE_ADMIN", "ROLE_CUSTOMER"]} />
             }
           >
-            <Route path="/admin" Component={Admin}>
-              <Route
-                index
-                path="/admin"
-                element={<Navigate to={"/admin/products"} />}
-              />
-              <Route index path="/admin/products" Component={ProductPageV2} />
-              <Route path="/admin/categories" Component={CategoryPage} />
-              <Route path="/admin/new-categories" Component={NewCategoryPage} />
-              <Route
-                path="/admin/products/:productId"
-                Component={ProductDetailsPage}
-              />
-              <Route
-                path="/admin/products/images/:productId"
-                Component={ImageUploadPage}
-              />
-              <Route path="/admin/new-product" Component={NewProductPage} />
-              <Route path="/admin/users" Component={UsersPage} />
-              <Route path="/admin/new" Component={NewAdminPage} />
+            <Route path="/me"></Route>
+          </Route> */}
+            <Route
+              element={
+                <RouteProtector allowedRoles={["ROLE_ADMIN"]}></RouteProtector>
+              }
+            >
+              <Route path="/admin" Component={Admin}>
+                <Route
+                  index
+                  path="/admin"
+                  element={<Navigate to={"/admin/products"} />}
+                />
+                <Route index path="/admin/products" Component={ProductPageV2} />
+                <Route path="/admin/categories" Component={CategoryPage} />
+                <Route
+                  path="/admin/new-categories"
+                  Component={NewCategoryPage}
+                />
+                <Route
+                  path="/admin/products/:productId"
+                  Component={ProductDetailsPage}
+                />
+                <Route
+                  path="/admin/products/images/:productId"
+                  Component={ImageUploadPage}
+                />
+                <Route path="/admin/new-product" Component={NewProductPage} />
+                <Route path="/admin/users" Component={UsersPage} />
+                <Route path="/admin/new" Component={NewAdminPage} />
+              </Route>
             </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </Suspense>
   );
 }
 

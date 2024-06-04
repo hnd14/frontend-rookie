@@ -21,15 +21,15 @@ import { formatPrice } from "../../util/Util.ts";
 
 const ProductDetailsCustomerPage = () => {
   const { productId } = useParams();
+  const { auth } = useContext(AuthContext);
   const { data, error, isLoading } = useSWR(
     ["/products", productId],
     ([url, arg]) => storeFetcher(url + "/" + arg?.toString())
   );
-  const { auth } = useContext(AuthContext);
   const { data: ratingData, isLoading: ratingLoading } = useSWR(
     `/products/${productId}/ratings/me`,
     (url) => storeFetcher(url),
-    { shouldRetryOnError: auth.isAuthenticated }
+    { shouldRetryOnError: auth.isAuthenticated, suspense: auth.isAuthenticated }
   );
 
   if (error) return <h1>Error</h1>;

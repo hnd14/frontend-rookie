@@ -39,14 +39,17 @@ const ProductSearchLayout = ({
   };
   const { data, error, isLoading, mutate } = useSWR(
     ["/products", params],
-    ([url, params]) => fetcher(url, params)
+    ([url, params]) => fetcher(url, params),
+    { suspense: true }
   );
   const {
     data: cateData,
     error: cateError,
     isLoading: cateLoading,
-  } = useSWR(["/categories", { pageSize: 1000 }], ([url, params]) =>
-    fetcher(url, params)
+  } = useSWR(
+    ["/categories", { pageSize: 1000 }],
+    ([url, params]) => fetcher(url, params),
+    { suspense: true }
   );
   const [pageNumber, setPageNumber] = useState(1);
   const RANDOM_KEY = Math.random().toString().slice(2, 20);
@@ -118,12 +121,22 @@ const ProductSearchLayout = ({
           <Form onSubmit={handleSubmit}>
             <Form.Group>
               <Form.Label>Product name</Form.Label>
-              <Form.Control type="text" ref={nameRef} />
+              <Form.Control
+                type="text"
+                ref={nameRef}
+                defaultValue={searchParams.get("name") || ""}
+              />
             </Form.Group>
             <Form.Group>
               <Form.Label>Min Price</Form.Label>
               <InputGroup>
-                <Form.Control type="number" ref={minPriceRef} />
+                <Form.Control
+                  type="number"
+                  ref={minPriceRef}
+                  defaultValue={
+                    searchParams.get("minPrice")?.slice(0, -3) || ""
+                  }
+                />
                 <InputGroup.Text>000</InputGroup.Text>
                 <InputGroup.Text>VND</InputGroup.Text>
               </InputGroup>
@@ -145,13 +158,34 @@ const ProductSearchLayout = ({
             <Form.Group>
               <Form.Label>Max Price</Form.Label>
               <InputGroup>
-                <Form.Control type="number" ref={maxPriceRef} />
+                <Form.Control
+                  type="number"
+                  ref={maxPriceRef}
+                  defaultValue={
+                    searchParams.get("maxPrice")?.slice(0, -3) || ""
+                  }
+                />
                 <InputGroup.Text>000</InputGroup.Text>
                 <InputGroup.Text>VND</InputGroup.Text>
               </InputGroup>
             </Form.Group>
             <Button type="submit" variant="dark" className="m-1">
               Search
+            </Button>
+            <Button
+              variant="dark"
+              className="m-1"
+              onClick={() => {
+                setSearchParams((p) => {
+                  p.delete("name");
+                  p.delete("category");
+                  p.delete("minPrice");
+                  p.delete("maxPrice");
+                  return p;
+                });
+              }}
+            >
+              Reset
             </Button>
           </Form>
         </Container>
