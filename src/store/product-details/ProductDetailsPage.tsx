@@ -38,8 +38,8 @@ const ProductDetailsCustomerPage = () => {
   if (auth.isAuthenticated && !ratingData) return <h1>Loading...</h1>;
   if (
     auth.isAuthenticated &&
-    ratingData.username != auth.username &&
-    ratingData.productId.toString() != productId
+    (ratingData.username != auth.username ||
+      ratingData.productId.toString() != productId)
   )
     return <h1>Loading...</h1>;
   const categories = () =>
