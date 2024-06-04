@@ -80,7 +80,9 @@ const NewAdminPage = () => {
               Password must stay between 6 and 100 characters.
             </Form.Control.Feedback>
           </Form.Group>
-          <SubmitButton>Create New Admin</SubmitButton>
+          <SubmitButton goBackLink="/admin/users">
+            Create New Admin
+          </SubmitButton>
         </Form>
       </Container>
     </>

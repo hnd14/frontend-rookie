@@ -53,7 +53,9 @@ const NewCategoryFormV2 = () => {
           <Form.Control type="text" name="desc"></Form.Control>
         </Form.Group>
 
-        <SubmitButton>Create category</SubmitButton>
+        <SubmitButton goBackLink="/admin/categories">
+          Create category
+        </SubmitButton>
       </Form>
     </Container>
   );

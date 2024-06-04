@@ -120,7 +120,7 @@ const NewProductForm = () => {
           </Form.Label>
           <Select options={options} isMulti={true} ref={categoriesRef}></Select>
         </Form.Group>
-        <SubmitButton>Create product</SubmitButton>
+        <SubmitButton goBackLink="/admin/products">Create product</SubmitButton>
       </Form>
     </div>
   );

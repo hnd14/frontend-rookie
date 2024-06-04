@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Container } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const SubmitButton = ({ children = "" }) => {
+const SubmitButton = ({ children = "", goBackLink = "" }) => {
   const nav = useNavigate();
   return (
     <Container className="mt-3 ms-0">
@@ -14,9 +14,22 @@ const SubmitButton = ({ children = "" }) => {
         onClick={() => {
           nav(0);
         }}
+        className="me-1"
       >
         Reset
       </Button>
+      {goBackLink != "" ? (
+        <Button
+          variant="dark"
+          onClick={() => {
+            nav(goBackLink);
+          }}
+        >
+          Go back
+        </Button>
+      ) : (
+        <></>
+      )}
     </Container>
   );
 };
