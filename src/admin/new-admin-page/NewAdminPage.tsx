@@ -1,10 +1,13 @@
 import React, { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { createNewAdmin } from "../services/AdminService.ts";
 import SubmitButton from "../../components/SubmitButton.jsx";
+import PasswordWrapper from "../../components/PasswordWrapper.tsx";
 const NewAdminPage = () => {
   const [validated, setValidated] = useState(false);
+  const [passwordType, setPassWordType] = useState("password");
+  const [passwordReType, setPassWordReType] = useState("password");
   const nav = useNavigate();
 
   const handleSubmit = (event) => {
@@ -56,26 +59,46 @@ const NewAdminPage = () => {
           </Form.Group>
           <Form.Group controlId="password">
             <Form.Label>Password</Form.Label>
-            <Form.Control
-              name="password"
-              type="password"
-              required
-              minLength={6}
-              maxLength={100}
-            />
+            <PasswordWrapper
+              showPassword={() => {
+                setPassWordType("text");
+              }}
+              hidePassword={() => {
+                setPassWordType("password");
+              }}
+            >
+              <Form.Control
+                name="password"
+                type={passwordType}
+                required
+                minLength={6}
+                maxLength={100}
+              />
+            </PasswordWrapper>
+
             <Form.Control.Feedback type="invalid">
               Password must stay between 6 and 100 characters.
             </Form.Control.Feedback>
           </Form.Group>
           <Form.Group controlId="password-repeat">
             <Form.Label>Repeat password</Form.Label>
-            <Form.Control
-              name="passwordRe"
-              type="password"
-              required
-              minLength={6}
-              maxLength={100}
-            />
+            <PasswordWrapper
+              showPassword={() => {
+                setPassWordReType("text");
+              }}
+              hidePassword={() => {
+                setPassWordReType("password");
+              }}
+            >
+              <Form.Control
+                name="passwordRe"
+                type={passwordReType}
+                required
+                minLength={6}
+                maxLength={100}
+              />
+            </PasswordWrapper>
+
             <Form.Control.Feedback type="invalid">
               Password must stay between 6 and 100 characters.
             </Form.Control.Feedback>

@@ -1,13 +1,15 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { login } from "../services/LoginService.ts";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider.jsx";
 import { mutate } from "swr";
+import PasswordWrapper from "../../components/PasswordWrapper.tsx";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const usernameRef = useRef(document.createElement("input"));
   const passwordRef = useRef(document.createElement("input"));
+  const [passwordType, setPassWordType] = useState("password");
   const location = useLocation;
   const from = location.state?.from?.pathname;
   const { setAuth } = useContext(AuthContext);
@@ -74,12 +76,21 @@ const LoginForm = () => {
           <label htmlFor="password" className="form-label">
             Password
           </label>
-          <input
-            ref={passwordRef}
-            type="password"
-            className="form-control"
-            id="password"
-          />
+          <PasswordWrapper
+            showPassword={() => {
+              setPassWordType("text");
+            }}
+            hidePassword={() => {
+              setPassWordType("password");
+            }}
+          >
+            <input
+              ref={passwordRef}
+              type={passwordType}
+              className="form-control"
+              id="password"
+            />
+          </PasswordWrapper>
         </div>
 
         <button type="submit" className="btn btn-dark m-2">
