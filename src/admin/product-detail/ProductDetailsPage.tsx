@@ -66,7 +66,7 @@ const ProductDetailsPage = () => {
         .then(() => {
           alert("Update product successfully!");
           mutate();
-          nav("/admin");
+          nav("/admin/products");
         })
         .catch(() => {
           alert("Update product failed");
@@ -189,7 +189,7 @@ const ProductDetailsPage = () => {
             </Col>
           </Row>
         </Form.Group>
-        <SubmitButton>Update product</SubmitButton>
+        <SubmitButton goBackLink="/admin/products">Update product</SubmitButton>
       </Form>
     </div>
   );

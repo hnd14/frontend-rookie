@@ -31,7 +31,7 @@ const StorePage = () => {
           </NavItem>
           {auth.roles?.includes("ROLE_ADMIN") ? (
             <Nav.Item>
-              <Nav.Link onClick={() => nav("/admin")} active={true}>
+              <Nav.Link onClick={() => nav("/admin/products")} active={true}>
                 Admin
               </Nav.Link>
             </Nav.Item>

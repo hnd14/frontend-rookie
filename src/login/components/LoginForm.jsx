@@ -42,7 +42,7 @@ const LoginForm = () => {
           if (from) {
             navigate(from, { replace: true });
           } else if (response.data.roles.includes("ROLE_ADMIN")) {
-            navigate("/admin", { replace: true });
+            navigate("/admin/products", { replace: true });
           } else {
             navigate("/", { replace: true });
           }

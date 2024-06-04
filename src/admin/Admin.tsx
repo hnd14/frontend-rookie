@@ -15,7 +15,7 @@ const Admin = () => {
           <Nav.Item>
             <Nav.Link
               eventKey="products"
-              onClick={() => nav("/admin")}
+              onClick={() => nav("/admin/products")}
               active={true}
             >
               Products

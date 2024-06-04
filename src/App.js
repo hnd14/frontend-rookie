@@ -2,7 +2,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import { LoginPage } from "./login/LoginPage.tsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./store/home/Home.tsx";
 import Admin from "./admin/Admin.tsx";
 import CategoryPage from "./admin/category/CategoryPage.tsx";
@@ -41,7 +41,12 @@ function App() {
             }
           >
             <Route path="/admin" Component={Admin}>
-              <Route index path="/admin" Component={ProductPageV2} />
+              <Route
+                index
+                path="/admin"
+                element={<Navigate to={"/admin/products"} />}
+              />
+              <Route index path="/admin/products" Component={ProductPageV2} />
               <Route path="/admin/categories" Component={CategoryPage} />
               <Route path="/admin/new-categories" Component={NewCategoryPage} />
               <Route
