@@ -24,8 +24,8 @@ import LoadingPage from "./components/LoadingPage.tsx";
 
 function App() {
   return (
-    <Suspense>
-      <BrowserRouter fallback={<LoadingPage />}>
+    <Suspense fallback={<LoadingPage />}>
+      <BrowserRouter>
         <Routes>
           <Route Component={PersistentLogin}>
             <Route path="/" exact Component={StorePage}>
@@ -76,6 +76,7 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="*" element={<Error404Page />} />
         </Routes>
       </BrowserRouter>
     </Suspense>
