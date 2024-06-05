@@ -13,9 +13,13 @@ const RatingCard = ({ data }) => {
           <StaticStar score={data.scores} size="h5" />
         </Card.Text>
       </Card.Header>
-      <Card.Body>
-        <Card.Text>{data.comment}</Card.Text>
-      </Card.Body>
+      {data.comment ? (
+        <Card.Body>
+          <Card.Text>{data.comment}</Card.Text>
+        </Card.Body>
+      ) : (
+        <></>
+      )}
       <Card.Footer>
         <Card.Text>
           <i>{`${formatTime(data.updatedTime)}`}</i>

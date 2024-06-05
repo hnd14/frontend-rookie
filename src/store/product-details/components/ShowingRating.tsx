@@ -61,7 +61,7 @@ const ShowingRating = ({ productId }) => {
         <option value={20}>20 comments/page</option>
       </Form.Select>
       {data.content.map((rating) => (
-        <RatingCard data={rating} />
+        <RatingCard data={rating} key={rating.id} />
       ))}
       <Container className="d-flex justify-content-center">
         <Pagination>{items}</Pagination>

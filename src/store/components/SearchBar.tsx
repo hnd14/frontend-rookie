@@ -44,6 +44,7 @@ const SearchBar = () => {
           >
             {data.content.map((category) => (
               <Dropdown.Item
+                key={category.id}
                 onClick={() => {
                   category_id = category.id;
                   setChosenCategory(category.name);
