@@ -1,6 +1,7 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import StaticStar from "./StaticStar.tsx";
+import { formatTime } from "../../../util/Util.ts";
 
 const RatingCard = ({ data }) => {
   return (
@@ -15,6 +16,11 @@ const RatingCard = ({ data }) => {
       <Card.Body>
         <Card.Text>{data.comment}</Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <Card.Text>
+          <i>{`${formatTime(data.updatedTime)}`}</i>
+        </Card.Text>
+      </Card.Footer>
     </Card>
   );
 };
