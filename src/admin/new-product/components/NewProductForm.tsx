@@ -3,8 +3,8 @@ import { Form, InputGroup } from "react-bootstrap";
 import { NewProductItem } from "../../product/model/NewProductItem";
 import Select from "react-select";
 import {
+  adminFetcher,
   createNewProducts,
-  getAllCategories,
 } from "../../services/AdminService.ts";
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
@@ -13,9 +13,10 @@ import ErrorPage from "../../../components/ErrorPage.tsx";
 
 const NewProductForm = () => {
   const [validated, setValidated] = useState(false);
-  const categoriesRef = useRef(null);
-  const { data, error, isLoading } = useSWR(["/categories", 1], ([url, arg]) =>
-    getAllCategories(arg)
+  const categoriesRef = useRef<any>(null);
+  const { data, error, isLoading } = useSWR(
+    ["/categories", { pageSize: 100 }],
+    ([url, arg]) => adminFetcher(url, arg)
   );
   const nav = useNavigate();
   if (error) return <ErrorPage error={error}></ErrorPage>;

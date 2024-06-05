@@ -1,11 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useSWR from "swr";
-import {
-  getAllCategories,
-  getProducts,
-  updateProduct,
-} from "../services/AdminService.ts";
+import { updateProduct, adminFetcher } from "../services/AdminService.ts";
 import { Button, Col, Form, InputGroup, Row } from "react-bootstrap";
 import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
@@ -18,18 +14,21 @@ const ProductDetailsPage = () => {
   const { productId } = useParams();
   const nav = useNavigate();
   const { data, error, isLoading, mutate } = useSWR(
-    ["/products", productId],
-    ([url, arg]) => getProducts(arg || "")
+    `/products/${productId}`,
+    (url) => adminFetcher(url, {})
   );
-  const categoriesRef = useRef(null);
+  const categoriesRef = useRef<any>(null);
   const {
     data: cateData,
-    error: error_2,
-    isLoading: isLoading_2,
-  } = useSWR(["/categories", 1], ([url, arg]) => getAllCategories(arg));
+    error: cateError,
+    isLoading: cateLoading,
+  } = useSWR(["/categories", { pageSize: 100 }], ([url, arg]) =>
+    adminFetcher(url, arg)
+  );
 
-  if (error || error_2) return <ErrorPage error={error}></ErrorPage>;
-  if (isLoading || isLoading_2 || !data.categoriesInfo || !cateData.content)
+  if (error || cateError)
+    return <ErrorPage error={error || cateError}></ErrorPage>;
+  if (isLoading || cateLoading || !data.categoriesInfo || !cateData.content)
     return <h1>Loading...</h1>;
 
   const options = () =>
