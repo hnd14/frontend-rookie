@@ -15,6 +15,9 @@ const ImageUploadForm = ({ productId, next }) => {
   const newImagesRef = useRef<HTMLInputElement>(
     document.createElement("input")
   );
+  const thumbnailRef = useRef<HTMLInputElement>(
+    document.createElement("input")
+  );
   const { data, error, isLoading } = useSWR(`/products/${productId}`, (url) =>
     adminFetcher(url, {})
   );
@@ -55,7 +58,7 @@ const ImageUploadForm = ({ productId, next }) => {
     if (e.target.files[0]) {
       setThumbnail(URL.createObjectURL(e.target.files[0]));
     } else if (data.thumbnailUrl) {
-      setThumbnail(data.thumnailUrl ? IMAGES_HOST + data.thumbnailUrl : "");
+      setThumbnail(IMAGES_HOST + data.thumbnailUrl);
     } else {
       setThumbnail("");
     }
@@ -72,7 +75,12 @@ const ImageUploadForm = ({ productId, next }) => {
   };
 
   const handleDeleteThumbnail = () => {
-    setThumbnail("");
+    thumbnailRef.current.value = "";
+    if (data.thumbnailUrl) {
+      setThumbnail(IMAGES_HOST + data.thumbnailUrl);
+    } else {
+      setThumbnail("");
+    }
   };
 
   return (
@@ -110,6 +118,7 @@ const ImageUploadForm = ({ productId, next }) => {
             accept=".png, .jpg, .jpeg"
             type="file"
             name="thumbnail"
+            ref={thumbnailRef}
             onChange={handleThumbnailChange}
           />
         </Form.Group>
