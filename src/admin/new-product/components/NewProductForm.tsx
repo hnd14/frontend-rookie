@@ -9,6 +9,7 @@ import {
 import useSWR from "swr";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../../../components/SubmitButton.jsx";
+import ErrorPage from "../../../components/ErrorPage.tsx";
 
 const NewProductForm = () => {
   const [validated, setValidated] = useState(false);
@@ -17,7 +18,7 @@ const NewProductForm = () => {
     getAllCategories(arg)
   );
   const nav = useNavigate();
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading...</h1>;
   const handleSubmit = (event) => {
     event.preventDefault();

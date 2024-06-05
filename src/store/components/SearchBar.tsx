@@ -10,6 +10,7 @@ import {
 import useSWR from "swr";
 import { storeFetcher } from "../services/CustomerServices.ts";
 import { useNavigate } from "react-router-dom";
+import ErrorPage from "../../components/ErrorPage.tsx";
 let category_id = null;
 const SearchBar = () => {
   const [chosenCategory, setChosenCategory] = useState("Categories");
@@ -22,7 +23,7 @@ const SearchBar = () => {
     ["/categories", params],
     ([url, params]) => storeFetcher(url, params)
   );
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading</h1>;
   const handleSearch = () => {
     if (category_id) {

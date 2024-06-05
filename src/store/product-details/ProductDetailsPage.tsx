@@ -18,6 +18,7 @@ import { AuthContext } from "../../context/AuthProvider.jsx";
 import ShowingRating from "./components/ShowingRating.tsx";
 import StaticStar from "./components/StaticStar.tsx";
 import { formatPrice } from "../../util/Util.ts";
+import ErrorPage from "../../components/ErrorPage.tsx";
 
 const ProductDetailsCustomerPage = () => {
   const { productId } = useParams();
@@ -26,13 +27,22 @@ const ProductDetailsCustomerPage = () => {
     ["/products", productId],
     ([url, arg]) => storeFetcher(url + "/" + arg?.toString())
   );
-  const { data: ratingData, isLoading: ratingLoading } = useSWR(
-    `/products/${productId}/ratings/me`,
-    (url) => storeFetcher(url),
-    { shouldRetryOnError: auth.isAuthenticated, suspense: auth.isAuthenticated }
-  );
+  const {
+    data: ratingData,
+    isLoading: ratingLoading,
+    error: error2,
+  } = useSWR(`/products/${productId}/ratings/me`, (url) => storeFetcher(url), {
+    shouldRetryOnError: auth.isAuthenticated,
+    suspense: auth.isAuthenticated,
+  });
 
-  if (error) return <h1>Error</h1>;
+  if (error) {
+    console.log(error.response.data);
+    return <ErrorPage error={error}></ErrorPage>;
+  }
+  if (error2) {
+    console.log(error2);
+  }
   if (isLoading || !data.categories || ratingLoading)
     return <h1>Loading...</h1>;
   if (auth.isAuthenticated && !ratingData) return <h1>Loading...</h1>;
@@ -134,7 +144,7 @@ const ProductDetailsCustomerPage = () => {
           <ShowingRating productId={productId} />
         </Col>
         <Col>
-          {auth.isAuthenticated ? (
+          {auth.isAuthenticated && auth.roles.includes("ROLE_CUSTOMER") ? (
             ratingData ? (
               <RatingProduct
                 handleSubmit={handleRating}

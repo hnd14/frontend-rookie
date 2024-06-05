@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { useSearchParams } from "react-router-dom";
 import useSWR from "swr";
+import ErrorPage from "./ErrorPage.tsx";
 
 interface Props {
   fetcher: any;
@@ -38,7 +39,7 @@ const PaginationLayout = ({
   );
 
   const RANDOM_KEY = Math.random().toString().slice(2, 20);
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading...</h1>;
   // create paginations
   let items: React.JSX.Element[] = [];

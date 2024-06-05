@@ -11,6 +11,7 @@ import Select from "react-select";
 import { NewProductItem } from "../product/model/NewProductItem.ts";
 import SubmitButton from "../../components/SubmitButton.jsx";
 import { formatTime } from "../../util/Util.ts";
+import ErrorPage from "../../components/ErrorPage.tsx";
 
 const ProductDetailsPage = () => {
   const [validated, setValidated] = useState(false);
@@ -27,7 +28,7 @@ const ProductDetailsPage = () => {
     isLoading: isLoading_2,
   } = useSWR(["/categories", 1], ([url, arg]) => getAllCategories(arg));
 
-  if (error || error_2) return <h1>Error</h1>;
+  if (error || error_2) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading || isLoading_2 || !data.categoriesInfo || !cateData.content)
     return <h1>Loading...</h1>;
 

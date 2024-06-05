@@ -3,6 +3,7 @@ import ProductCarousel from "../components/ProductCarousel.tsx";
 import { storeFetcher } from "../services/CustomerServices.ts";
 import useSWR from "swr";
 import SearchBar from "../components/SearchBar.tsx";
+import ErrorPage from "../../components/ErrorPage.tsx";
 
 const Home = () => {
   const featuredParams = {
@@ -18,7 +19,7 @@ const Home = () => {
     storeFetcher(url, params)
   );
 
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading</h1>;
   return (
     <>

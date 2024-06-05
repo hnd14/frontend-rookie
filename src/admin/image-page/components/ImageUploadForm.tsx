@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { IMAGES_HOST } from "../../../const/Util.ts";
 import ImagePreview from "../../components/ImagePreview.tsx";
 import SubmitButton from "../../../components/SubmitButton.jsx";
+import ErrorPage from "../../../components/ErrorPage.tsx";
 
 const ImageUploadForm = ({ productId, next }) => {
   const [thumbnail, setThumbnail] = useState("");
@@ -33,7 +34,7 @@ const ImageUploadForm = ({ productId, next }) => {
   }, [data]);
 
   if (error) {
-    return <h1>Error</h1>;
+    return <ErrorPage error={error}></ErrorPage>;
   }
   if (isLoading) return <h1>Loading</h1>;
 

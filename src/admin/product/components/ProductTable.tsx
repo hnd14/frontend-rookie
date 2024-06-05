@@ -3,6 +3,7 @@ import { Container, Pagination, Table } from "react-bootstrap";
 import useSWR from "swr";
 import { deleteProduct, getAllProducts } from "../../services/AdminService.ts";
 import ProductRow from "./ProductRow.tsx";
+import ErrorPage from "../../../components/ErrorPage.tsx";
 
 const ProductTable = () => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -10,7 +11,7 @@ const ProductTable = () => {
     ["/products", pageNumber],
     ([url, arg]) => getAllProducts(arg)
   );
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading...</h1>;
 
   // create paginations

@@ -10,6 +10,7 @@ import {
   Pagination,
   Row,
 } from "react-bootstrap";
+import ErrorPage from "./ErrorPage.tsx";
 
 interface Props {
   fetcher: any;
@@ -53,7 +54,8 @@ const ProductSearchLayout = ({
   );
   const [pageNumber, setPageNumber] = useState(1);
   const RANDOM_KEY = Math.random().toString().slice(2, 20);
-  if (error || cateError) return <h1>Error</h1>;
+  if (error || cateError)
+    return <ErrorPage error={error || cateError}></ErrorPage>;
   if (isLoading || cateLoading) return <h1>Loading...</h1>;
 
   const handleSubmit = (event) => {

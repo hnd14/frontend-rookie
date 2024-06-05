@@ -4,6 +4,7 @@ import { storeFetcher } from "../../services/CustomerServices.ts";
 import useSWR from "swr";
 import { Container, Form, Pagination } from "react-bootstrap";
 import RatingCard from "./RatingCard.tsx";
+import ErrorPage from "../../../components/ErrorPage.tsx";
 
 const ShowingRating = ({ productId }) => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -17,7 +18,7 @@ const ShowingRating = ({ productId }) => {
     [`/products/${productId}/ratings`, params],
     ([url, params]) => storeFetcher(url, params)
   );
-  if (error) return <h1>Error</h1>;
+  if (error) return <ErrorPage error={error}></ErrorPage>;
   if (isLoading) return <h1>Loading...</h1>;
   // create paginations
   let items: React.JSX.Element[] = [];
