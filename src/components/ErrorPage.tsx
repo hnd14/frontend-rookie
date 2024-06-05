@@ -11,9 +11,9 @@ const ErrorPage = ({ error }) => {
   const { auth, setAuth } = useContext(AuthContext);
   const [isLoading, setisLoading] = useState(true);
   console.log(error);
-  if (error.response.status == 400) return <Error400Page />;
-  if (error.response.status == 404) return <Error404Page />;
-  if (error.response.status == 403) {
+  if (error?.response?.status == 400) return <Error400Page />;
+  if (error?.response?.status == 404) return <Error404Page />;
+  if (error?.response?.status == 403) {
     verify()
       .then((res) => {
         setAuth(res);
