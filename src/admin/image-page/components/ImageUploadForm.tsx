@@ -162,11 +162,15 @@ const ImageUploadForm = ({ productId, next }) => {
                     src={url}
                     handleDelete={() => {
                       setNewImagesUrl((imagesUrl) => {
-                        if (imagesUrl.length == 1) {
-                          return [];
+                        const data: string[] = [];
+                        for (let imageUrl of imagesUrl) {
+                          if (imageUrl !== url) {
+                            data.push(imageUrl);
+                          }
                         }
-                        return imagesUrl.splice(index, 1);
+                        return data;
                       });
+                      console.log(newImagesUrl);
                       const dt = new DataTransfer();
 
                       for (let file of newImagesRef.current.files)
