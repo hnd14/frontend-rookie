@@ -40,6 +40,11 @@ const Admin = () => {
             </Nav.Link>
           </Nav.Item>
           <Nav.Item>
+            <Nav.Link eventKey="me" active={true} onClick={() => nav("/me")}>
+              Profile
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Nav.Link eventKey="store" active={true} onClick={() => nav("/")}>
               Store
             </Nav.Link>

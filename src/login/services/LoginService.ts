@@ -25,3 +25,13 @@ export async function verify() {
     .get(AUTH_API + "/verify", { withCredentials: true })
     .then((res) => res.data);
 }
+
+export const authFetcher = (url) => {
+  return axios
+    .get(AUTH_API + url, { withCredentials: true })
+    .then((res) => res.data);
+};
+
+export const updatePassword = (data) => {
+  return axios.put(AUTH_API + "/me/password", data, { withCredentials: true });
+};

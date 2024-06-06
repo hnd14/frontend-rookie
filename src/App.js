@@ -21,6 +21,10 @@ import UsersPage from "./admin/users/UsersPage.tsx";
 import NewAdminPage from "./admin/new-admin-page/NewAdminPage.tsx";
 import { Suspense } from "react";
 import LoadingPage from "./components/LoadingPage.tsx";
+import ProfilePage from "./profile/ProfilePage.tsx";
+import BasicProfile from "./profile/components/BasicProfile.tsx";
+import Error404Page from "./components/Error404Page.tsx";
+import SecurityPage from "./profile/components/SecurityPage.tsx";
 
 function App() {
   return (
@@ -38,13 +42,18 @@ function App() {
                 Component={ProductDetailsCustomerPage}
               />
             </Route>
-            {/* <Route
-            element={
-              <RouteProtector allowedRoles={["ROLE_ADMIN", "ROLE_CUSTOMER"]} />
-            }
-          >
-            <Route path="/me"></Route>
-          </Route> */}
+            <Route
+              element={
+                <RouteProtector
+                  allowedRoles={["ROLE_ADMIN", "ROLE_CUSTOMER"]}
+                />
+              }
+            >
+              <Route path="/me" Component={ProfilePage}>
+                <Route path="/me" Component={BasicProfile}></Route>
+                <Route path="/me/security" Component={SecurityPage}></Route>
+              </Route>
+            </Route>
             <Route
               element={
                 <RouteProtector allowedRoles={["ROLE_ADMIN"]}></RouteProtector>

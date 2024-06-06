@@ -1,12 +1,21 @@
 import React, { useContext } from "react";
-import { Navbar, Nav, Container, Button, NavItem } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Nav,
+  NavItem,
+  Navbar,
+  Row,
+} from "react-bootstrap";
 import { Outlet, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../context/AuthProvider.jsx";
 import LogOutButton from "../components/LogOutButton.tsx";
+import SideBar from "../components/SideBar.tsx";
 
-const StorePage = () => {
-  const nav = useNavigate();
+const ProfilePage = () => {
   const { auth } = useContext(AuthContext);
+  const nav = useNavigate();
   return (
     <>
       <Navbar
@@ -16,18 +25,13 @@ const StorePage = () => {
         <Nav justify variant="tabs" style={{ width: "50%" }}>
           <Nav.Item>
             <Nav.Link onClick={() => nav("/")} active={true}>
-              Home
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link onClick={() => nav("/products")} active={true}>
               Store
             </Nav.Link>
           </Nav.Item>
-          {auth.isAuthenticated ? (
+          {auth.roles?.includes("ROLE_ADMIN") ? (
             <Nav.Item>
-              <Nav.Link onClick={() => nav("/me")} active={true}>
-                Profile
+              <Nav.Link onClick={() => nav("/admin/products")} active={true}>
+                Admin
               </Nav.Link>
             </Nav.Item>
           ) : (
@@ -38,15 +42,6 @@ const StorePage = () => {
               Contact
             </Nav.Link>
           </NavItem>
-          {auth.roles?.includes("ROLE_ADMIN") ? (
-            <Nav.Item>
-              <Nav.Link onClick={() => nav("/admin/products")} active={true}>
-                Admin
-              </Nav.Link>
-            </Nav.Item>
-          ) : (
-            <></>
-          )}
         </Nav>
         {auth.isAuthenticated ? (
           <LogOutButton />
@@ -74,10 +69,22 @@ const StorePage = () => {
           </Container>
         )}
       </Navbar>
-
-      <Outlet />
+      <Row>
+        <Col xs={2}>
+          <SideBar
+            title={"Profile Page"}
+            links={[
+              { label: "General", link: "/me" },
+              { label: "Security", link: "/me/security" },
+            ]}
+          ></SideBar>
+        </Col>
+        <Col xs={10} className="justify-content-start">
+          <Outlet />
+        </Col>
+      </Row>
     </>
   );
 };
 
-export default StorePage;
+export default ProfilePage;
